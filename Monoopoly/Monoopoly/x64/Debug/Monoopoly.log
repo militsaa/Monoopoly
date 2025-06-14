@@ -1,0 +1,7 @@
+﻿  Field.cpp
+  Property.cpp
+  Generating Code...
+C:\Users\Mili\Desktop\monoopoly fr\Monoopoly\Monoopoly\Property.cpp(3,11): error C2511: 'Property::Property(Neighbourhood)': overloaded member function not found in 'Property'
+      C:\Users\Mili\Desktop\monoopoly fr\Monoopoly\Monoopoly\Property.h(11,7):
+      see declaration of 'Property'
+  
