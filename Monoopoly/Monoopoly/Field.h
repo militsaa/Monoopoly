@@ -1,7 +1,7 @@
 #pragma once
 #include "SmallStringOpt.h"
 
-enum class FieldType {PROPERTY, CARDFIELD, GOTOJAIL, JAIL, GO};
+enum class FieldType {PROPERTY, CARDFIELD, GOTOJAIL, JAIL, GO, PARKING, TAXFIELD};
 
 class Field {
 	FieldType type;

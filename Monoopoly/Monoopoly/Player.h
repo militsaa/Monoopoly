@@ -15,4 +15,7 @@ public:
 	int getBalance() const;
 	void buyProp(int tax);
 	void collectRent(int rent);
+	void payOrGet(int tax);
+	int getPosition() const;
+	void setPosition(int index);
 };

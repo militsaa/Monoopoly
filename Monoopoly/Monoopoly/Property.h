@@ -5,7 +5,7 @@
 #include "Cottage.h"
 
 enum Neighbourhood {
-	BLUE, GREEN, RED, PINK, ORANGE, YELLOW, PURPLE, BROWN, STATION, UTILITY
+	BLUE, GREEN, RED, PINK, ORANGE, YELLOW, PURPLE, BROWN, STATION,DARKBLUE, UTILITY, STATION
 };
 
 class Property :public Field {
@@ -20,4 +20,5 @@ public:
 	Property(String name, FieldType t, Neighbourhood n, int price, int baseRent);
 	bool isBought() const; //check if player is nullptr
 	void buy(Player& player);
+	//void payToOwner()
 };

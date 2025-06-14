@@ -127,20 +127,31 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Board.cpp" />
+    <ClCompile Include="Card.cpp" />
     <ClCompile Include="Castle.cpp" />
     <ClCompile Include="Cottage.cpp" />
+    <ClCompile Include="DeadField.cpp" />
     <ClCompile Include="Field.cpp" />
     <ClCompile Include="Monoopoly.cpp" />
     <ClCompile Include="Mortgage.cpp" />
+    <ClCompile Include="MovePositionCard.cpp" />
+    <ClCompile Include="PaymentCard.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Property.cpp" />
     <ClCompile Include="SmallStringOpt.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Board.h" />
+    <ClInclude Include="Card.h" />
     <ClInclude Include="Castle.h" />
+    <ClInclude Include="Constants.h" />
     <ClInclude Include="Cottage.h" />
+    <ClInclude Include="DeadField.h" />
     <ClInclude Include="Field.h" />
     <ClInclude Include="Mortgage.h" />
+    <ClInclude Include="MovePositionCard.h" />
+    <ClInclude Include="PaymentCard.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Property.h" />
     <ClInclude Include="SmallStringOpt.h" />
