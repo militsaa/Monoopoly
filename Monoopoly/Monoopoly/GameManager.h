@@ -5,12 +5,12 @@
 
 class GameManager {
 	Vector<Player*> players;
-	Board board;
+	Board& db = Board::getInstance();
 
 public:
-	GameManager(const Vector<Player*>& initialPlayers);
+	GameManager();
 
-	void buildCottage(int index);
-	void buildCastle(int index);
-
+	//void buildCottage(int index);
+	//void buildCastle(int index);
+	//here estimate how many to pay for each prop when on it
 };

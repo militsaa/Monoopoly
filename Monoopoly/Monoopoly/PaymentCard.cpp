@@ -5,5 +5,5 @@ PaymentCard::PaymentCard(CardType type, String description, int amount) : Card(t
 void PaymentCard::apply(Player& player) const
 {
 	//check if player has the amount
-	player.payOrGet(amount);
+	//player.payOrGet(amount);
 }

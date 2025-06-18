@@ -1,9 +1,13 @@
 #include "GameManager.h"
 
-void GameManager::buildCottage(int index)
-{
-	/*if (board.getFields()[index]->getType() == FieldType::PROPERTY &&)
-	{
+//void GameManager::buildCottage(int index)
+//{
+//	/*if (board.getFields()[index]->getType() == FieldType::PROPERTY &&)
+//	{
+//
+//	}*/
+//}
 
-	}*/
+GameManager::GameManager()
+{
 }

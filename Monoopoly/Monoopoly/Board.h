@@ -4,10 +4,11 @@
 
 class Board {
 	Vector<Field*> fields;
-	// zabrani kopirane i op=!
-public:
 	Board();
+
+public:
 	~Board();
-	//Vector<Field*> getFields() const;
-	void addCottage(int fieldInd, int playerInd);
+	Board(const Board& other) = delete;
+	Board& operator=(const Board& other) = delete;
+	static Board& getInstance();
 };

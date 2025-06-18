@@ -1,4 +1,18 @@
-﻿  Board.cpp
+﻿  BankField.cpp
+  Board.cpp
+  Card.cpp
+  DeadField.cpp
+  Field.cpp
+  GameManager.cpp
+  GoFiled.cpp
+  MovePositionCard.cpp
+  PaymentCard.cpp
+  Player.cpp
+C:\Users\Mili\Desktop\monoopoly fr\Monoopoly\Monoopoly\PaymentCard.cpp(8,9): error C2039: 'payOrGet': is not a member of 'Player'
+      C:\Users\Mili\Desktop\monoopoly fr\Monoopoly\Monoopoly\Player.h(5,7):
+      see declaration of 'Player'
+  
   Property.cpp
+  TaxField.cpp
+C:\Users\Mili\Desktop\monoopoly fr\Monoopoly\Monoopoly\TaxField.cpp(3,86): error C2614: 'TaxField': illegal member initialization: 'amount' is not a base or member
   Generating Code...
-  Monoopoly.vcxproj -> C:\Users\Mili\Desktop\monoopoly fr\Monoopoly\x64\Debug\Monoopoly.exe

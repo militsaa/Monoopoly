@@ -1,7 +1,6 @@
 #pragma once 
 #include "SmallStringOpt.h"
 #include "Vector.h"
-//#include "Property"
 
 class Player {
 	String userName;
@@ -9,15 +8,14 @@ class Player {
 	int balance;
 	bool inJail;
 	int jailTurns=0;
-	int id;
-	static int idGen;
-	//Vector< Property*> owned; 
+
 public:
 	Player();
 	int getBalance() const;
 	void buyProp(int tax);
 	void collectRent(int rent);
-	void payOrGet(int tax);
+	void addMoney(int tax);
+	void giveMoney(int amount);
 	int getPosition() const;
 	void setPosition(int index);
 };

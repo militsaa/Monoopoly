@@ -127,30 +127,36 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BankField.cpp" />
     <ClCompile Include="Board.cpp" />
     <ClCompile Include="Card.cpp" />
     <ClCompile Include="DeadField.cpp" />
     <ClCompile Include="Field.cpp" />
     <ClCompile Include="GameManager.cpp" />
+    <ClCompile Include="GoFiled.cpp" />
     <ClCompile Include="Monoopoly.cpp" />
     <ClCompile Include="MovePositionCard.cpp" />
     <ClCompile Include="PaymentCard.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Property.cpp" />
     <ClCompile Include="SmallStringOpt.cpp" />
+    <ClCompile Include="TaxField.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BankField.h" />
     <ClInclude Include="Board.h" />
     <ClInclude Include="Card.h" />
     <ClInclude Include="Constants.h" />
     <ClInclude Include="DeadField.h" />
     <ClInclude Include="Field.h" />
     <ClInclude Include="GameManager.h" />
+    <ClInclude Include="GoFiled.h" />
     <ClInclude Include="MovePositionCard.h" />
     <ClInclude Include="PaymentCard.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Property.h" />
     <ClInclude Include="SmallStringOpt.h" />
+    <ClInclude Include="TaxField.h" />
     <ClInclude Include="Vector.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

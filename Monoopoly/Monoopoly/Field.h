@@ -11,5 +11,5 @@ public:
 	virtual ~Field()= default;
 	FieldType getType() const;
 	String getName() const;
-	//virtual Field* clone() const = 0;
+	virtual Field* clone() const = 0;
 };

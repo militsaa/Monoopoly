@@ -20,3 +20,8 @@ void Property::buy(Player& player)
 	}
 }
 
+Property* Property::clone() const
+{
+	return new Property(*this);
+}
+
