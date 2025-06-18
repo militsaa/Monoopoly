@@ -1,6 +1,15 @@
 #include "Player.h"
 #include "Constants.h"
 
+static int idGen = 0;
+
+Player::Player()
+{
+	//TODO
+	id = idGen;
+	idGen++;
+}
+
 int Player::getBalance() const
 {
     return balance;

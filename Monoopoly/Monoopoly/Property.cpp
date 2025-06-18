@@ -19,3 +19,4 @@ void Property::buy(Player& player)
 		std::cout << "You don't have enough money to buy this property!" << "\n";
 	}
 }
+

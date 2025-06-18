@@ -11,11 +11,11 @@ Board::Board()
 	fields.push_back(new Property("Whitechapel Road", FieldType::PROPERTY, Neighbourhood::BROWN, 60, 4));
 	fields.push_back(new DeadField("INCOME TAX", FieldType::TAXFIELD, -200));
 	fields.push_back(new Property("Marylebone Station", FieldType::PROPERTY, Neighbourhood::STATION, 200, 25));
-	fields.push_back(new Property("The Angel Islington", FieldType::PROPERTY, Neighbourhood::BROWN, 100, 6));
+	fields.push_back(new Property("The Angel Islington", FieldType::PROPERTY, Neighbourhood::LIGTHBLUE, 100, 6));
 	//fields.push_back(new DeadField("Old Kent Road", FieldType::PROPERTY, Neighbourhood::BROWN, 60, 0));
-	fields.push_back(new Property("Euston Road", FieldType::PROPERTY, Neighbourhood::BLUE, 100, 6));
-	fields.push_back(new Property("Pentonville Road", FieldType::PROPERTY, Neighbourhood::BLUE, 120, 8));
-	fields.push_back(new Field("In jail!", FieldType::JAIL));
+	fields.push_back(new Property("Euston Road", FieldType::PROPERTY, Neighbourhood::LIGTHBLUE, 100, 6));
+	fields.push_back(new Property("Pentonville Road", FieldType::PROPERTY, Neighbourhood::LIGTHBLUE, 120, 8));
+	//fields.push_back(new Field("In jail!", FieldType::JAIL)); make jail class
 	fields.push_back(new Property("Pall Mall", FieldType::PROPERTY, Neighbourhood::PINK, 140, 10));
 	//fields.push_back(new DeadField("Old Kent Road", FieldType::PROPERTY, Neighbourhood::BROWN, 60, 0));
 	fields.push_back(new Property("Whitehall", FieldType::PROPERTY, Neighbourhood::PINK, 140, 10));
@@ -46,4 +46,26 @@ Board::Board()
 	//fields.push_back(new DeadField("Old Kent Road", FieldType::PROPERTY, Neighbourhood::BROWN, 60, 0));
 	fields.push_back(new Property("Mayfair", FieldType::PROPERTY, Neighbourhood::DARKBLUE, 400, 50));
 
+}
+
+Board::~Board()
+{
+	for (size_t i = 0; i < fields.getSize(); i++)
+	{
+		delete fields[i];
+	}
+	
+}
+
+void Board::addCottage(int fieldInd, int playerInd)
+{
+	if (fields[fieldInd]->getType()==FieldType::PROPERTY )
+	{
+
+	}
+}
+
+Vector<Field*> Board::getFields() const
+{
+	return Vector<Field*>();
 }

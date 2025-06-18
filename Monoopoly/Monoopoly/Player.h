@@ -9,6 +9,8 @@ class Player {
 	int balance;
 	bool inJail;
 	int jailTurns=0;
+	int id;
+	static int idGen;
 	//Vector< Property*> owned; 
 public:
 	Player();

@@ -4,7 +4,10 @@
 
 class Board {
 	Vector<Field*> fields;
-	
+	// zabrani kopirane i op=!
 public:
 	Board();
+	~Board();
+	//Vector<Field*> getFields() const;
+	void addCottage(int fieldInd, int playerInd);
 };
