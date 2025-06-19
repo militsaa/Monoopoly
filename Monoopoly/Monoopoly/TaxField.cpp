@@ -4,4 +4,10 @@ TaxField::TaxField(String name, FieldType type, int amount) : BankField(name, ty
 
 void TaxField::applyEffect(Player& p)
 {
+	p.giveMoney(amount);
+}
+
+TaxField* TaxField::clone() const
+{
+	return new TaxField(*this);
 }

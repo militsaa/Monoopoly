@@ -5,4 +5,5 @@ class TaxField : public BankField {
 public:
     TaxField(String name, FieldType type, int amount);
     void applyEffect(Player& p) override;
+    TaxField* clone() const override;
 };

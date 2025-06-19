@@ -18,7 +18,6 @@ class Property :public Field {
 
 public:
 	Property(String name, FieldType t, Neighbourhood n, int price, int baseRent);
-	Property(String name, FieldType t, Neighbourhood n, int price);
 	bool isBought() const; //check if player is nullptr
 	void buy(Player& player);
 	Property* clone() const override;
