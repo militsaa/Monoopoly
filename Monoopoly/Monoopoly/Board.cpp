@@ -69,3 +69,8 @@ Board& Board::getInstance()
 	return instance;
 }
 
+Vector<Field*> Board::getFields() const
+{
+	return fields;
+}
+

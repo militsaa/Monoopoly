@@ -11,4 +11,5 @@ public:
 	Board(const Board& other) = delete;
 	Board& operator=(const Board& other) = delete;
 	static Board& getInstance();
+	Vector<Field*> getFields()const;
 };

@@ -21,5 +21,10 @@ GameManager& GameManager::getInstance()
 
 Vector<Player*> GameManager::getPlayers() const
 {
-    return Vector<Player*>();
+    return players;
+}
+
+Vector<Field*> GameManager::getFields() const
+{
+    return board.getFields();
 }

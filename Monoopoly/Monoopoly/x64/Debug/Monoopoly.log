@@ -1,7 +1,16 @@
-﻿  CardDeck.cpp
+﻿  BankField.cpp
+  Board.cpp
+  Card.cpp
+  CardDeck.cpp
+  GameManager.cpp
+  GoField.cpp
+  GroupPaymentCard.cpp
+C:\Users\Mili\Desktop\monoopoly fr\Monoopoly\Monoopoly\GroupPaymentCard.cpp(24,45): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+  Monoopoly.cpp
   MovePositionCard.cpp
+  PaymentCard.cpp
   Player.cpp
-  Random.cpp
-C:\Users\Mili\Desktop\monoopoly fr\Monoopoly\Monoopoly\Random.cpp(6,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  Property.cpp
+  TaxField.cpp
   Generating Code...
   Monoopoly.vcxproj -> C:\Users\Mili\Desktop\monoopoly fr\Monoopoly\x64\Debug\Monoopoly.exe

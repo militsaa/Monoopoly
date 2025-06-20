@@ -25,3 +25,13 @@ Property* Property::clone() const
 	return new Property(*this);
 }
 
+Player* Property::getOwner() const
+{
+	return owner;
+}
+
+void Property::returnProperty()
+{
+	owner = nullptr;
+}
+

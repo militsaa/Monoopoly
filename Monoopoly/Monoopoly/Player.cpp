@@ -1,5 +1,7 @@
 #include "Player.h"
 #include "Constants.h"
+#include "GameManager.h"
+#include "Property.h"
 
 Player::Player()
 {
@@ -71,4 +73,28 @@ String Player::getUserName() const
 bool Player::isBankrupt() const
 {
 	return balance < 0;
+}
+
+void Player::returnAllProperties()
+{
+	GameManager& gm = GameManager::getInstance();
+	for (size_t i = 0; i < FIELDS_COUNT; ++i)
+	{
+		Field* currField = gm.getFields()[i];
+
+		if (currField->getType() == FieldType::PROPERTY)
+		{
+			Property* currProp = static_cast<Property*>(currField);   
+			if (currProp->getOwner() == this)    
+			{
+				currProp->returnProperty();
+			}
+		}
+	}
+}
+
+void Player::bankrupt()
+{
+	returnAllProperties();
+	balance = -1;
 }

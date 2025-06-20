@@ -5,7 +5,7 @@
 
 class GameManager {
 	Vector<Player*> players;
-	Board& db = Board::getInstance();
+	Board& board = Board::getInstance();
 	GameManager();
 
 public:
@@ -13,6 +13,7 @@ public:
 	GameManager& operator=(const GameManager& other) = delete;
 	static GameManager& getInstance();
 	Vector<Player*> getPlayers() const;
+	Vector<Field*> getFields() const;
 	//void buildCottage(int index);
 	//void buildCastle(int index);
 	//here estimate how many to pay for each prop when on it

@@ -21,6 +21,8 @@ public:
 	bool isBought() const; //check if player is nullptr
 	void buy(Player& player);
 	Property* clone() const override;
+	Player* getOwner()const;
+	void returnProperty();
 	//void payToOwner()
 	/*void addCottage();
 	bool hasMaxCottages() const;

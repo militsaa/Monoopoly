@@ -21,6 +21,6 @@ public:
 	void movePosition(int steps);
 	String getUserName()const;
 	bool isBankrupt() const;
-	//handle Returning All Properties to the bank
-	//appropriate method!!!
+	void returnAllProperties();
+	void bankrupt();
 };
