@@ -130,6 +130,7 @@
     <ClCompile Include="BankField.cpp" />
     <ClCompile Include="Board.cpp" />
     <ClCompile Include="Card.cpp" />
+    <ClCompile Include="CardDeck.cpp" />
     <ClCompile Include="DeadField.cpp" />
     <ClCompile Include="Field.cpp" />
     <ClCompile Include="GameManager.cpp" />
@@ -147,6 +148,7 @@
     <ClInclude Include="BankField.h" />
     <ClInclude Include="Board.h" />
     <ClInclude Include="Card.h" />
+    <ClInclude Include="CardDeck.h" />
     <ClInclude Include="Constants.h" />
     <ClInclude Include="Field.h" />
     <ClInclude Include="GameManager.h" />

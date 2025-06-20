@@ -9,5 +9,3 @@ public:
 	void applyEffect(Player& player) const override;
 	MovePositionCard* clone() const override;
 };
-
-//TODO: THE LOGIC BEHIND BUILDING THEN SELLING MORTGAGE AND TRADING 

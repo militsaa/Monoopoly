@@ -26,6 +26,7 @@ public:
 	size_t getSize() const;
 	T& at(size_t);
 	const T& at(size_t) const;
+	void swapVal(size_t, size_t);
 
 	T& operator[](size_t);
 	const T& operator[](size_t) const;
@@ -78,10 +79,9 @@ Vector<T>::Vector()
 }
 
 template<typename T>
-Vector<T>::Vector(size_t capacity)
+Vector<T>::Vector(size_t capacity) : capacity(capacity)
 {
-	this->capacity = capacity;
-	data = new T[capacity];
+	data = new T[capacity]{};
 	size = 0;
 }
 
@@ -227,4 +227,16 @@ const T& Vector<T>::operator[](size_t index) const
 	return at(index);
 }
 
+template<typename T>
+void Vector<T>::swapVal(size_t i, size_t j)
+{
+	if (i >= size || j >= size) 
+	{
+		throw std::out_of_range("Out of range!");
+	}
+
+	T tmp = data[i];
+	data[i] = data[j];
+	data[j] = tmp;
+}
 

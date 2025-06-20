@@ -1,3 +1,5 @@
 ﻿  GroupPaymentCard.cpp
-C:\Users\Mili\Desktop\monoopoly fr\Monoopoly\Monoopoly\GroupPaymentCard.cpp(24,44): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-  Monoopoly.vcxproj -> C:\Users\Mili\Desktop\monoopoly fr\Monoopoly\x64\Debug\Monoopoly.exe
+C:\Users\Mili\Desktop\monoopoly fr\Monoopoly\Monoopoly\GroupPaymentCard.cpp(24,45): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+MovePositionCard.obj : error LNK2005: "int __cdecl randomNumberGenerator(int)" (?randomNumberGenerator@@YAHH@Z) already defined in CardDeck.obj
+Player.obj : error LNK2005: "int __cdecl randomNumberGenerator(int)" (?randomNumberGenerator@@YAHH@Z) already defined in CardDeck.obj
+C:\Users\Mili\Desktop\monoopoly fr\Monoopoly\x64\Debug\Monoopoly.exe : fatal error LNK1169: one or more multiply defined symbols found

@@ -21,7 +21,7 @@ void GroupPaymentCard::getMoneyFromOthers(GameManager& gm, Player& player) const
 void GroupPaymentCard::giveMoneyToOthers(GameManager& gm, Player& player) const
 {
 	int sum = -amount;
-	player.giveMoney(gm.getPlayers().getSize() * sum);
+	player.giveMoney(gm.getPlayers().getSize() * sum); //should i cast to int
 	if (player.isBankrupt())
 	{
 		//handle Returning All Properties to the bank
