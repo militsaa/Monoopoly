@@ -49,3 +49,26 @@ void Player::setPosition(int index)
 		possition = index;
 	}
 }
+
+void Player::movePosition(int steps)
+{
+	possition += steps;
+	if (possition>=FIELDS_COUNT)
+	{
+		possition -= FIELDS_COUNT;
+	}
+	else if (possition<0)
+	{
+		possition += FIELDS_COUNT;
+	}
+}
+
+String Player::getUserName() const
+{
+	return userName;
+}
+
+bool Player::isBankrupt() const
+{
+	return balance < 0;
+}

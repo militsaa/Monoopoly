@@ -130,9 +130,11 @@
     <ClCompile Include="BankField.cpp" />
     <ClCompile Include="Board.cpp" />
     <ClCompile Include="Card.cpp" />
+    <ClCompile Include="DeadField.cpp" />
     <ClCompile Include="Field.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="GoField.cpp" />
+    <ClCompile Include="GroupPaymentCard.cpp" />
     <ClCompile Include="Monoopoly.cpp" />
     <ClCompile Include="MovePositionCard.cpp" />
     <ClCompile Include="PaymentCard.cpp" />
@@ -149,7 +151,8 @@
     <ClInclude Include="Field.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="GoField.h" />
-    <ClInclude Include="Jail.h" />
+    <ClInclude Include="DeadField.h" />
+    <ClInclude Include="GroupPaymentCard.h" />
     <ClInclude Include="MovePositionCard.h" />
     <ClInclude Include="PaymentCard.h" />
     <ClInclude Include="Player.h" />

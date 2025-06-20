@@ -1,8 +1,18 @@
 #include "MovePositionCard.h"
+#include "Constants.h"
 
-MovePositionCard::MovePositionCard(CardType type, String description, int ind) : Card(type, description), index(ind) {}
+MovePositionCard::MovePositionCard(CardType type, String description, int steps) : Card(type, description), steps(steps) {}
 
-void MovePositionCard::apply(Player& player) const
+void MovePositionCard::applyEffect(Player& player) const
 {
-	player.setPosition(index);
+	player.movePosition(steps);
 }
+
+MovePositionCard* MovePositionCard::clone() const
+{
+	return new MovePositionCard(*this);
+}
+
+
+
+

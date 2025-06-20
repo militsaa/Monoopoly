@@ -54,6 +54,12 @@
     <ClCompile Include="TaxField.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="DeadField.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GroupPaymentCard.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Player.h">
@@ -98,7 +104,10 @@
     <ClInclude Include="TaxField.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Jail.h">
+    <ClInclude Include="DeadField.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GroupPaymentCard.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

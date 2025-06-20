@@ -18,4 +18,9 @@ public:
 	void giveMoney(int amount);
 	int getPosition() const;
 	void setPosition(int index);
+	void movePosition(int steps);
+	String getUserName()const;
+	bool isBankrupt() const;
+	//handle Returning All Properties to the bank
+	//appropriate method!!!
 };

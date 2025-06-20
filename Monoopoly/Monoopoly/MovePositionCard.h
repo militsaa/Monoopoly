@@ -2,10 +2,12 @@
 #include "Card.h"
 
 class MovePositionCard : public Card {
-	int index;
+	int steps;
+	//bool shouldCollectGo;
 public:
-	MovePositionCard(CardType type, String description, int index);
-	void apply(Player& player) const override;
+	MovePositionCard(CardType type, String description, int steps);
+	void applyEffect(Player& player) const override;
+	MovePositionCard* clone() const override;
 };
 
 //TODO: THE LOGIC BEHIND BUILDING THEN SELLING MORTGAGE AND TRADING 

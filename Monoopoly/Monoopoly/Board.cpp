@@ -2,8 +2,7 @@
 #include "Property.h"
 #include "TaxField.h"
 #include "GoField.h"
-
-//#include ".h"
+#include "DeadField.h"
 
 Board::Board()
 {
@@ -18,7 +17,7 @@ Board::Board()
 	fields.push_back(new Property("Euston Road", FieldType::PROPERTY, Neighbourhood::LIGTHBLUE, 100, 6));
 	fields.push_back(new Property("Pentonville Road", FieldType::PROPERTY, Neighbourhood::LIGTHBLUE, 120, 8));
 
-	//in Jail
+	fields.push_back(new DeadField("In Jail \n Vising", FieldType::JAIL));
 	fields.push_back(new Property("Pall Mall", FieldType::PROPERTY, Neighbourhood::PINK, 140, 10));
 	fields.push_back(new Property("Electric Company", 
 	FieldType::PROPERTY, Neighbourhood::UTILITY, 150,1));
@@ -30,7 +29,7 @@ Board::Board()
 	fields.push_back(new Property("Marlborough Street", FieldType::PROPERTY, Neighbourhood::ORANGE, 180, 14));
 	fields.push_back(new Property("Vine Street", FieldType::PROPERTY, Neighbourhood::ORANGE, 200, 16));
 
-	//pARKING
+	fields.push_back(new DeadField("PARKING", FieldType::PARKING));
 	fields.push_back(new Property("Strand", FieldType::PROPERTY, Neighbourhood::RED, 220, 18));
 	//CHANCE
 	fields.push_back(new Property("Fleet Street", FieldType::PROPERTY, Neighbourhood::RED, 220, 18));
@@ -42,7 +41,7 @@ Board::Board()
 		FieldType::PROPERTY, Neighbourhood::UTILITY, 150, 1));
 	fields.push_back(new Property("Piccadilly", FieldType::PROPERTY, Neighbourhood::YELLOW, 280, 24));
 
-	//"GO TO JAIL!"
+	fields.push_back(new DeadField("GO TO JAIL!", FieldType::GOTOJAIL));
 	fields.push_back(new Property("Regent Street", FieldType::PROPERTY, Neighbourhood::GREEN, 300, 26));
 	fields.push_back(new Property("Oxford Street", FieldType::PROPERTY, Neighbourhood::GREEN, 300, 26));
 	//COMMUNITY CHEST

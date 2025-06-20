@@ -2,8 +2,17 @@
 
 PaymentCard::PaymentCard(CardType type, String description, int amount) : Card(type, description), amount(amount){}
 
-void PaymentCard::apply(Player& player) const
+void PaymentCard::applyEffect(Player& player) const
 {
-	//check if player has the amount
-	//player.payOrGet(amount);
+	if (amount>0)
+	{
+		player.addMoney(amount);
+		return;
+	}
+	player.giveMoney(-amount);
+}
+
+PaymentCard* PaymentCard::clone() const
+{
+	return new PaymentCard(*this);
 }
