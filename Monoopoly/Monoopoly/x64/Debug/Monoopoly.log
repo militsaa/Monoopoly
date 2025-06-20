@@ -1,16 +1,14 @@
-﻿  BankField.cpp
-  Board.cpp
-  Card.cpp
-  CardDeck.cpp
+﻿  Board.cpp
   GameManager.cpp
-  GoField.cpp
-  GroupPaymentCard.cpp
-C:\Users\Mili\Desktop\monoopoly fr\Monoopoly\Monoopoly\GroupPaymentCard.cpp(24,45): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-  Monoopoly.cpp
-  MovePositionCard.cpp
-  PaymentCard.cpp
+C:\Users\Mili\Desktop\monoopoly fr\Monoopoly\Monoopoly\GameManager.cpp(22,31): error C2065: 'FIELDS_COUNT': undeclared identifier
+C:\Users\Mili\Desktop\monoopoly fr\Monoopoly\Monoopoly\GameManager.cpp(46,19): error C2511: 'void GameManager::buildCottage(int)': overloaded member function not found in 'GameManager'
+      C:\Users\Mili\Desktop\monoopoly fr\Monoopoly\Monoopoly\GameManager.h(6,7):
+      see declaration of 'GameManager'
+  
+C:\Users\Mili\Desktop\monoopoly fr\Monoopoly\Monoopoly\GameManager.cpp(48,10): error C2597: illegal reference to non-static member 'GameManager::cottageLeft'
+      C:\Users\Mili\Desktop\monoopoly fr\Monoopoly\Monoopoly\GameManager.h(10,6):
+      see declaration of 'GameManager::cottageLeft'
+  
   Player.cpp
   Property.cpp
-  TaxField.cpp
   Generating Code...
-  Monoopoly.vcxproj -> C:\Users\Mili\Desktop\monoopoly fr\Monoopoly\x64\Debug\Monoopoly.exe

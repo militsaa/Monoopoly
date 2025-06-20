@@ -3,18 +3,16 @@
 #include "Player.h"
 
 enum Neighbourhood {
-	BROWN, LIGTHBLUE, PINK, ORANGE, GREEN, RED, YELLOW, PURPLE, STATION, DARKBLUE, UTILITY
+	BROWN, LIGTHBLUE, PINK, ORANGE, GREEN, RED, YELLOW, STATION, DARKBLUE, UTILITY
 };
 
 class Property :public Field {
 	Neighbourhood neighbourhood;
 	Player* owner = nullptr;
 	int price;
-	int baseRent=1;
-	int houseCount;
+	int baseRent = 1;
+	int cottageCount = 0;
 	bool hasCastle = false;
-	int housePrise;
-	int castlePrice;
 
 public:
 	Property(String name, FieldType t, Neighbourhood n, int price, int baseRent);
@@ -23,6 +21,13 @@ public:
 	Property* clone() const override;
 	Player* getOwner()const;
 	void returnProperty();
+	void addCottage();
+	void replaceWithCastle();
+	bool isOwnedBy(const Player& p) const;
+	bool getHasCastle() const;
+	int getCottageCount() const;
+	Neighbourhood getNeighbourhood()const;
+	int getCottagePrice() const;
 	//void payToOwner()
 	/*void addCottage();
 	bool hasMaxCottages() const;

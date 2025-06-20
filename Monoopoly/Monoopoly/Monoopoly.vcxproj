@@ -146,6 +146,7 @@
     <ClCompile Include="TaxField.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Bank.h" />
     <ClInclude Include="BankField.h" />
     <ClInclude Include="Board.h" />
     <ClInclude Include="Card.h" />
