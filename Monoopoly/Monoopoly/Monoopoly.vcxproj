@@ -141,6 +141,7 @@
     <ClCompile Include="PaymentCard.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Property.cpp" />
+    <ClCompile Include="Random.cpp" />
     <ClCompile Include="SmallStringOpt.cpp" />
     <ClCompile Include="TaxField.cpp" />
   </ItemGroup>
@@ -159,6 +160,7 @@
     <ClInclude Include="PaymentCard.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Property.h" />
+    <ClInclude Include="Random.h" />
     <ClInclude Include="SmallStringOpt.h" />
     <ClInclude Include="TaxField.h" />
     <ClInclude Include="Vector.h" />

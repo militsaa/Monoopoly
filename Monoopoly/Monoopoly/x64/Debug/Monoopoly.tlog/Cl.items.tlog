@@ -1,6 +1,7 @@
 C:\Users\Mili\Desktop\monoopoly fr\Monoopoly\Monoopoly\BankField.cpp;C:\Users\Mili\Desktop\monoopoly fr\Monoopoly\Monoopoly\x64\Debug\BankField.obj
 C:\Users\Mili\Desktop\monoopoly fr\Monoopoly\Monoopoly\Board.cpp;C:\Users\Mili\Desktop\monoopoly fr\Monoopoly\Monoopoly\x64\Debug\Board.obj
 C:\Users\Mili\Desktop\monoopoly fr\Monoopoly\Monoopoly\Card.cpp;C:\Users\Mili\Desktop\monoopoly fr\Monoopoly\Monoopoly\x64\Debug\Card.obj
+C:\Users\Mili\Desktop\monoopoly fr\Monoopoly\Monoopoly\CardDeck.cpp;C:\Users\Mili\Desktop\monoopoly fr\Monoopoly\Monoopoly\x64\Debug\CardDeck.obj
 C:\Users\Mili\Desktop\monoopoly fr\Monoopoly\Monoopoly\DeadField.cpp;C:\Users\Mili\Desktop\monoopoly fr\Monoopoly\Monoopoly\x64\Debug\DeadField.obj
 C:\Users\Mili\Desktop\monoopoly fr\Monoopoly\Monoopoly\Field.cpp;C:\Users\Mili\Desktop\monoopoly fr\Monoopoly\Monoopoly\x64\Debug\Field.obj
 C:\Users\Mili\Desktop\monoopoly fr\Monoopoly\Monoopoly\GameManager.cpp;C:\Users\Mili\Desktop\monoopoly fr\Monoopoly\Monoopoly\x64\Debug\GameManager.obj
@@ -11,5 +12,6 @@ C:\Users\Mili\Desktop\monoopoly fr\Monoopoly\Monoopoly\MovePositionCard.cpp;C:\U
 C:\Users\Mili\Desktop\monoopoly fr\Monoopoly\Monoopoly\PaymentCard.cpp;C:\Users\Mili\Desktop\monoopoly fr\Monoopoly\Monoopoly\x64\Debug\PaymentCard.obj
 C:\Users\Mili\Desktop\monoopoly fr\Monoopoly\Monoopoly\Player.cpp;C:\Users\Mili\Desktop\monoopoly fr\Monoopoly\Monoopoly\x64\Debug\Player.obj
 C:\Users\Mili\Desktop\monoopoly fr\Monoopoly\Monoopoly\Property.cpp;C:\Users\Mili\Desktop\monoopoly fr\Monoopoly\Monoopoly\x64\Debug\Property.obj
+C:\Users\Mili\Desktop\monoopoly fr\Monoopoly\Monoopoly\Random.cpp;C:\Users\Mili\Desktop\monoopoly fr\Monoopoly\Monoopoly\x64\Debug\Random.obj
 C:\Users\Mili\Desktop\monoopoly fr\Monoopoly\Monoopoly\SmallStringOpt.cpp;C:\Users\Mili\Desktop\monoopoly fr\Monoopoly\Monoopoly\x64\Debug\SmallStringOpt.obj
 C:\Users\Mili\Desktop\monoopoly fr\Monoopoly\Monoopoly\TaxField.cpp;C:\Users\Mili\Desktop\monoopoly fr\Monoopoly\Monoopoly\x64\Debug\TaxField.obj

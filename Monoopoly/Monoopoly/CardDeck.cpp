@@ -1,4 +1,5 @@
 #include "CardDeck.h"
+#include "Random.h"
 
 void CardDeck::shuffleCards(int times)
 {
