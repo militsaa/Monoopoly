@@ -1,0 +1,85 @@
+#include "BuildableProperty.h"
+#include "GameManager.h"
+#include "Constants.h"
+
+BuildableProperty::BuildableProperty(String name, FieldType field, PropertyType type, int price, Neighbourhood n, int baseRent) : Property(name, field, type,price), neighbourhood(n), baseRent(baseRent){}
+
+BuildableProperty* BuildableProperty::clone() const
+{
+	return new BuildableProperty(*this);
+}
+
+void BuildableProperty::addCottage()
+{
+	cottageCount++;
+}
+
+void BuildableProperty::replaceWithCastle()
+{
+	cottageCount = 0;
+	hasCastle = true;
+}
+
+bool BuildableProperty::getHasCastle() const
+{
+	return cottageCount;
+}
+
+int BuildableProperty::getCottageCount() const
+{
+	return cottageCount;
+}
+
+Neighbourhood BuildableProperty::getNeighbourhood() const
+{
+	return neighbourhood;
+}
+
+int BuildableProperty::getCottagePrice() const
+{
+	switch (neighbourhood)
+	{
+	case Neighbourhood::BROWN:
+	case Neighbourhood::LIGTHBLUE:
+		return 50;
+		break;
+	case Neighbourhood::PINK:
+	case Neighbourhood::ORANGE:
+		return 100;
+		break;
+	case Neighbourhood::YELLOW:
+	case Neighbourhood::RED:
+		return 150;
+		break;
+	case Neighbourhood::GREEN:
+	case Neighbourhood::DARKBLUE:
+		return 200;
+		break;
+	default:
+		return 0;
+		break;
+	}
+}
+
+int BuildableProperty::rent() const
+{
+	if (!hasCastle && !cottageCount)
+	{
+		return baseRent;
+	}
+	else
+	{
+		//todo???
+	}
+}
+
+int estimateUtilityRent(BuildableProperty* current)
+{ 
+	//ok li e sravnenieto
+	GameManager& gm = GameManager::getInstance();
+	/*if (current->getOwner()==gm.getFields()[
+	{
+
+	}*/
+	return 0;
+}

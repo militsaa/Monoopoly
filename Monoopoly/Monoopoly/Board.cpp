@@ -1,57 +1,55 @@
 #include "Board.h"
-#include "Property.h"
+#include "BuildableProperty.h"
 #include "TaxField.h"
 #include "GoField.h"
 #include "DeadField.h"
+#include "Station.h"
 
 Board::Board()
-{
+{//String name, FieldType field, PropertyType type, int price, Neighbourhood n, int baseRent
 	fields.push_back(new GoField("Go", FieldType::GO, 200));
-	fields.push_back(new Property("Old Kent Road", FieldType::PROPERTY, Neighbourhood::BROWN, 60, 2));
+	fields.push_back(new BuildableProperty("Old Kent Road", FieldType::PROPERTY, PropertyType::BUILDABLE_PROPERTY, 60,Neighbourhood::BROWN, 2));
 	//community chest
-	fields.push_back(new Property("Whitechapel Road", FieldType::PROPERTY, Neighbourhood::BROWN, 60, 4));
+	fields.push_back(new BuildableProperty("Whitechapel Road", FieldType::PROPERTY, PropertyType::BUILDABLE_PROPERTY, 60, Neighbourhood::BROWN, 4));
 	fields.push_back(new TaxField("INCOME TAX", FieldType::TAXFIELD, 200));
-	fields.push_back(new Property("Marylebone Station", FieldType::PROPERTY, Neighbourhood::STATION, 200, 25));
-	fields.push_back(new Property("The Angel Islington", FieldType::PROPERTY, Neighbourhood::LIGTHBLUE, 100, 6));
+	fields.push_back(new Station("Marylebone Station", FieldType::PROPERTY, PropertyType::STATION));
+	fields.push_back(new BuildableProperty("The Angel Islington", FieldType::PROPERTY, PropertyType::BUILDABLE_PROPERTY,100, Neighbourhood::LIGTHBLUE, 6));
 	//chance
-	fields.push_back(new Property("Euston Road", FieldType::PROPERTY, Neighbourhood::LIGTHBLUE, 100, 6));
-	fields.push_back(new Property("Pentonville Road", FieldType::PROPERTY, Neighbourhood::LIGTHBLUE, 120, 8));
+	fields.push_back(new BuildableProperty("Euston Road", FieldType::PROPERTY, PropertyType::BUILDABLE_PROPERTY, 100, Neighbourhood::LIGTHBLUE, 6));
+	fields.push_back(new BuildableProperty("Pentonville Road", FieldType::PROPERTY, PropertyType::BUILDABLE_PROPERTY, 120, Neighbourhood::LIGTHBLUE, 8));
 
 	fields.push_back(new DeadField("In Jail \n Vising", FieldType::JAIL));
-	fields.push_back(new Property("Pall Mall", FieldType::PROPERTY, Neighbourhood::PINK, 140, 10));
-	fields.push_back(new Property("Electric Company", 
-	FieldType::PROPERTY, Neighbourhood::UTILITY, 150,1));
-	fields.push_back(new Property("Whitehall", FieldType::PROPERTY, Neighbourhood::PINK, 140, 10));
-	fields.push_back(new Property("Northumberland Ave", FieldType::PROPERTY, Neighbourhood::PINK, 160, 12));
-	fields.push_back(new Property("Fenchurch Street Stat.", FieldType::PROPERTY, Neighbourhood::STATION, 200, 25));
-	fields.push_back(new Property("Bow Street", FieldType::PROPERTY, Neighbourhood::ORANGE, 180, 14));
+	fields.push_back(new BuildableProperty("Pall Mall", FieldType::PROPERTY, PropertyType::BUILDABLE_PROPERTY, 140, Neighbourhood::PINK, 10));
+	//	fields.push_back(new BuildableProperty("Electric Company", FieldType::PROPERTY, PropertyType::UTILITY,  150, 1));
+	fields.push_back(new BuildableProperty("Whitehall", FieldType::PROPERTY, PropertyType::BUILDABLE_PROPERTY, 140, Neighbourhood::PINK, 10));
+	fields.push_back(new BuildableProperty("Northumberland Ave", FieldType::PROPERTY, PropertyType::BUILDABLE_PROPERTY, 160, Neighbourhood::PINK, 12));
+	fields.push_back(new Station("Fenchurch Street Stat.", FieldType::PROPERTY, PropertyType::STATION));
+	fields.push_back(new BuildableProperty("Bow Street", FieldType::PROPERTY, PropertyType::BUILDABLE_PROPERTY, 180, Neighbourhood::ORANGE, 14));
 	//COMMUNITY CHEST
-	fields.push_back(new Property("Marlborough Street", FieldType::PROPERTY, Neighbourhood::ORANGE, 180, 14));
-	fields.push_back(new Property("Vine Street", FieldType::PROPERTY, Neighbourhood::ORANGE, 200, 16));
+	fields.push_back(new BuildableProperty("Marlborough Street", FieldType::PROPERTY, PropertyType::BUILDABLE_PROPERTY, 180, Neighbourhood::ORANGE, 14));
+	fields.push_back(new BuildableProperty("Vine Street", FieldType::PROPERTY, PropertyType::BUILDABLE_PROPERTY, 200, Neighbourhood::ORANGE, 16));
 
 	fields.push_back(new DeadField("PARKING", FieldType::PARKING));
-	fields.push_back(new Property("Strand", FieldType::PROPERTY, Neighbourhood::RED, 220, 18));
+	fields.push_back(new BuildableProperty("Strand", FieldType::PROPERTY, PropertyType::BUILDABLE_PROPERTY, 220, Neighbourhood::RED, 18));
 	//CHANCE
-	fields.push_back(new Property("Fleet Street", FieldType::PROPERTY, Neighbourhood::RED, 220, 18));
-	fields.push_back(new Property("Trafalgar Square", FieldType::PROPERTY, Neighbourhood::RED, 240, 20));
-	fields.push_back(new Property("King's Cross Station", FieldType::PROPERTY, Neighbourhood::STATION, 200, 25));
-	fields.push_back(new Property("Leicester Square", FieldType::PROPERTY, Neighbourhood::YELLOW, 260, 22));
-	fields.push_back(new Property("Coventry Street", FieldType::PROPERTY, Neighbourhood::YELLOW, 260, 22));
-	fields.push_back(new Property("Water Works",
-		FieldType::PROPERTY, Neighbourhood::UTILITY, 150, 1));
-	fields.push_back(new Property("Piccadilly", FieldType::PROPERTY, Neighbourhood::YELLOW, 280, 24));
+	fields.push_back(new BuildableProperty("Fleet Street", FieldType::PROPERTY, PropertyType::BUILDABLE_PROPERTY, 220, Neighbourhood::RED, 18));
+	fields.push_back(new BuildableProperty("Trafalgar Square", FieldType::PROPERTY, PropertyType::BUILDABLE_PROPERTY, 240, Neighbourhood::RED, 20));
+	fields.push_back(new Station("King's Cross Station", FieldType::PROPERTY, PropertyType::STATION));
+	fields.push_back(new BuildableProperty("Leicester Square", FieldType::PROPERTY, PropertyType::BUILDABLE_PROPERTY, 260, Neighbourhood::YELLOW, 22));
+	fields.push_back(new BuildableProperty("Coventry Street", FieldType::PROPERTY, PropertyType::BUILDABLE_PROPERTY, 260, Neighbourhood::YELLOW, 22));
+	fields.push_back(new Property("Water Works", FieldType::PROPERTY, PropertyType::UTILITY, 150));
+	fields.push_back(new BuildableProperty("Piccadilly", FieldType::PROPERTY, PropertyType::BUILDABLE_PROPERTY, 280, Neighbourhood::YELLOW, 24));
 
 	fields.push_back(new DeadField("GO TO JAIL!", FieldType::GOTOJAIL));
-	fields.push_back(new Property("Regent Street", FieldType::PROPERTY, Neighbourhood::GREEN, 300, 26));
-	fields.push_back(new Property("Oxford Street", FieldType::PROPERTY, Neighbourhood::GREEN, 300, 26));
+	fields.push_back(new BuildableProperty("Regent Street", FieldType::PROPERTY, PropertyType::BUILDABLE_PROPERTY, 300, Neighbourhood::GREEN, 26));
+	fields.push_back(new BuildableProperty("Oxford Street", FieldType::PROPERTY, PropertyType::BUILDABLE_PROPERTY, 300, Neighbourhood::GREEN, 26));
 	//COMMUNITY CHEST
-	fields.push_back(new Property("Bond Street", FieldType::PROPERTY, Neighbourhood::GREEN, 320, 28));
-	fields.push_back(new Property("Liverpool Street Stat.", FieldType::PROPERTY, Neighbourhood::STATION, 200, 25));
+	fields.push_back(new BuildableProperty("Bond Street", FieldType::PROPERTY, PropertyType::BUILDABLE_PROPERTY, 320, Neighbourhood::GREEN, 28));
+	fields.push_back(new Station("Liverpool Street Stat.", FieldType::PROPERTY, PropertyType::STATION));
 	//CHANCE
-	fields.push_back(new Property("Park Lane", FieldType::PROPERTY, Neighbourhood::DARKBLUE, 350, 35));
+	fields.push_back(new BuildableProperty("Park Lane", FieldType::PROPERTY, PropertyType::BUILDABLE_PROPERTY, 350, Neighbourhood::DARKBLUE, 35));
 	fields.push_back(new TaxField("SUPER TAX", FieldType::TAXFIELD, 100));
-	fields.push_back(new Property("Mayfair", FieldType::PROPERTY, Neighbourhood::DARKBLUE, 400, 50));
-
+	fields.push_back(new BuildableProperty("Mayfair", FieldType::PROPERTY, PropertyType::BUILDABLE_PROPERTY, 400, Neighbourhood::DARKBLUE, 50));
 }
 
 Board::~Board()
@@ -60,7 +58,7 @@ Board::~Board()
 	{
 		delete fields[i];
 	}
-	
+
 }
 
 Board& Board::getInstance()

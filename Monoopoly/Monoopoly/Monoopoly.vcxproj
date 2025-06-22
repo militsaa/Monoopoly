@@ -140,13 +140,14 @@
     <ClCompile Include="MovePositionCard.cpp" />
     <ClCompile Include="PaymentCard.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="BuildableProperty.cpp" />
     <ClCompile Include="Property.cpp" />
     <ClCompile Include="Random.cpp" />
     <ClCompile Include="SmallStringOpt.cpp" />
+    <ClCompile Include="Station.cpp" />
     <ClCompile Include="TaxField.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Bank.h" />
     <ClInclude Include="BankField.h" />
     <ClInclude Include="Board.h" />
     <ClInclude Include="Card.h" />
@@ -160,10 +161,12 @@
     <ClInclude Include="MovePositionCard.h" />
     <ClInclude Include="PaymentCard.h" />
     <ClInclude Include="Player.h" />
-    <ClInclude Include="Property.h" />
+    <ClInclude Include="BuildableProperty.h" />
     <ClInclude Include="Random.h" />
     <ClInclude Include="SmallStringOpt.h" />
+    <ClInclude Include="Station.h" />
     <ClInclude Include="TaxField.h" />
+    <ClInclude Include="Property.h" />
     <ClInclude Include="Vector.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

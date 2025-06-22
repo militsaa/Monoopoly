@@ -1,7 +1,7 @@
 #include "Player.h"
 #include "Constants.h"
 #include "GameManager.h"
-#include "Property.h"
+#include "BuildableProperty.h"
 
 Player::Player()
 {
@@ -84,7 +84,7 @@ void Player::returnAllProperties()
 
 		if (currField->getType() == FieldType::PROPERTY)
 		{
-			Property* currProp = static_cast<Property*>(currField);   
+			BuildableProperty* currProp = static_cast<BuildableProperty*>(currField);   
 			if (currProp->getOwner() == this)    
 			{
 				currProp->returnProperty();

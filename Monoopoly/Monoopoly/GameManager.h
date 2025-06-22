@@ -2,7 +2,7 @@
 #include "Vector.h"
 #include "Player.h"
 #include "Board.h"
-#include "Property.h"
+#include "BuildableProperty.h"
 
 class GameManager {
 	Vector<Player*> players;
@@ -13,11 +13,11 @@ class GameManager {
 
 	GameManager();
 
-	bool canBuild(int fieldInd)const;
-	void collectNeighbour(Vector<Property*>& nb,
+	bool canBuildCottage(int fieldInd)const;
+	void collectNeighbour(Vector<BuildableProperty*>& nb,
 		int fieldInd) const;
-	bool evenBuildRuleRespected(const Vector<Property*>& sameNb) const;
-	bool ownsWholeSet(const Vector<Property*>& sameNb) const;
+	bool evenBuildRuleRespected(const Vector<BuildableProperty*>& sameNb) const;
+	bool ownsWholeSet(const Vector<BuildableProperty*>& sameNb) const;
 	int getFieldIndByName(String fieldName)const;
 
 public:

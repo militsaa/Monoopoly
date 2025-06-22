@@ -2,32 +2,25 @@
 #include "Field.h"
 #include "Player.h"
 
-enum Neighbourhood {
-	BROWN, LIGTHBLUE, PINK, ORANGE, GREEN, RED, YELLOW, STATION, DARKBLUE, UTILITY
+enum PropertyType{
+	BUILDABLE_PROPERTY, UTILITY, STATION
 };
 
 class Property :public Field {
-	Neighbourhood neighbourhood;
+protected:
 	Player* owner = nullptr;
+	PropertyType type;
 	int price;
-	int baseRent = 1;
-	int cottageCount = 0;
-	bool hasCastle = false;
 
 public:
-	Property(String name, FieldType t, Neighbourhood n, int price, int baseRent);
+	Property(String name, FieldType t, PropertyType type, int price);
+	Property* clone() const override;
 	bool isBought() const; //check if player is nullptr
 	void buy(Player& player);
-	Property* clone() const override;
 	Player* getOwner()const;
 	void returnProperty();
-	void addCottage();
-	void replaceWithCastle();
 	bool isOwnedBy(const Player& p) const;
-	bool getHasCastle() const;
-	int getCottageCount() const;
-	Neighbourhood getNeighbourhood()const;
-	int getCottagePrice() const;
+	virtual int rent()const;
 	//void payToOwner()
 	/*void addCottage();
 	bool hasMaxCottages() const;
