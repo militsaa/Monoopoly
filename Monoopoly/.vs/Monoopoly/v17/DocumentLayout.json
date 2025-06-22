@@ -11,12 +11,16 @@
       "RelativeMoniker": "D:0:0:{450DFCBB-B5F9-4CAD-9222-B86540825B6B}|Monoopoly\\Monoopoly.vcxproj|solutionrelative:Monoopoly\\GameManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{450DFCBB-B5F9-4CAD-9222-B86540825B6B}|Monoopoly\\Monoopoly.vcxproj|C:\\Users\\Mili\\Desktop\\monoopoly fr\\Monoopoly\\Monoopoly\\Property.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{450DFCBB-B5F9-4CAD-9222-B86540825B6B}|Monoopoly\\Monoopoly.vcxproj|solutionrelative:Monoopoly\\Property.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{450DFCBB-B5F9-4CAD-9222-B86540825B6B}|Monoopoly\\Monoopoly.vcxproj|C:\\Users\\Mili\\Desktop\\monoopoly fr\\Monoopoly\\Monoopoly\\Field.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{450DFCBB-B5F9-4CAD-9222-B86540825B6B}|Monoopoly\\Monoopoly.vcxproj|solutionrelative:Monoopoly\\Field.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{450DFCBB-B5F9-4CAD-9222-B86540825B6B}|Monoopoly\\Monoopoly.vcxproj|C:\\Users\\Mili\\Desktop\\monoopoly fr\\Monoopoly\\Monoopoly\\Property.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{450DFCBB-B5F9-4CAD-9222-B86540825B6B}|Monoopoly\\Monoopoly.vcxproj|solutionrelative:Monoopoly\\Property.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{450DFCBB-B5F9-4CAD-9222-B86540825B6B}|Monoopoly\\Monoopoly.vcxproj|C:\\Users\\Mili\\Desktop\\monoopoly fr\\Monoopoly\\Monoopoly\\Property.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{450DFCBB-B5F9-4CAD-9222-B86540825B6B}|Monoopoly\\Monoopoly.vcxproj|solutionrelative:Monoopoly\\Property.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{450DFCBB-B5F9-4CAD-9222-B86540825B6B}|Monoopoly\\Monoopoly.vcxproj|C:\\Users\\Mili\\Desktop\\monoopoly fr\\Monoopoly\\Monoopoly\\Board.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
@@ -37,10 +41,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{450DFCBB-B5F9-4CAD-9222-B86540825B6B}|Monoopoly\\Monoopoly.vcxproj|C:\\Users\\Mili\\Desktop\\monoopoly fr\\Monoopoly\\Monoopoly\\Monoopoly.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{450DFCBB-B5F9-4CAD-9222-B86540825B6B}|Monoopoly\\Monoopoly.vcxproj|solutionrelative:Monoopoly\\Monoopoly.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{450DFCBB-B5F9-4CAD-9222-B86540825B6B}|Monoopoly\\Monoopoly.vcxproj|C:\\Users\\Mili\\Desktop\\monoopoly fr\\Monoopoly\\Monoopoly\\Field.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{450DFCBB-B5F9-4CAD-9222-B86540825B6B}|Monoopoly\\Monoopoly.vcxproj|solutionrelative:Monoopoly\\Field.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{450DFCBB-B5F9-4CAD-9222-B86540825B6B}|Monoopoly\\Monoopoly.vcxproj|C:\\Users\\Mili\\Desktop\\monoopoly fr\\Monoopoly\\Monoopoly\\DeadField.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
@@ -154,8 +154,12 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 4,
           "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d3750d8a-574b-4fb3-b7e2-aa8af40e8231}"
+            },
             {
               "$type": "Document",
               "DocumentIndex": 3,
@@ -164,7 +168,7 @@
               "RelativeDocumentMoniker": "Monoopoly\\Property.h",
               "ToolTip": "C:\\Users\\Mili\\Desktop\\monoopoly fr\\Monoopoly\\Monoopoly\\Property.h",
               "RelativeToolTip": "Monoopoly\\Property.h",
-              "ViewState": "AgIAABMAAAAAAAAAAAAAAB0AAAAUAAAAAAAAAA==",
+              "ViewState": "AgIAABEAAAAAAAAAAAAAAB0AAAAUAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2025-06-13T09:31:42.689Z",
               "EditorCaption": ""
@@ -177,14 +181,14 @@
               "RelativeDocumentMoniker": "Monoopoly\\GameManager.h",
               "ToolTip": "C:\\Users\\Mili\\Desktop\\monoopoly fr\\Monoopoly\\Monoopoly\\GameManager.h",
               "RelativeToolTip": "Monoopoly\\GameManager.h",
-              "ViewState": "AgIAAA0AAAAAAAAAAAAkwBAAAAAWAAAAAAAAAA==",
+              "ViewState": "AgIAABAAAAAAAAAAAAAAABoAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2025-06-18T00:25:04.716Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
               "Title": "Property.cpp",
               "DocumentMoniker": "C:\\Users\\Mili\\Desktop\\monoopoly fr\\Monoopoly\\Monoopoly\\Property.cpp",
               "RelativeDocumentMoniker": "Monoopoly\\Property.cpp",
@@ -192,8 +196,7 @@
               "RelativeToolTip": "Monoopoly\\Property.cpp",
               "ViewState": "AgIAAEYAAAAAAAAAAAAAAFkAAAALAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-06-13T10:30:36.621Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-13T10:30:36.621Z"
             },
             {
               "$type": "Document",
@@ -203,14 +206,14 @@
               "RelativeDocumentMoniker": "Monoopoly\\GameManager.cpp",
               "ToolTip": "C:\\Users\\Mili\\Desktop\\monoopoly fr\\Monoopoly\\Monoopoly\\GameManager.cpp",
               "RelativeToolTip": "Monoopoly\\GameManager.cpp",
-              "ViewState": "AgIAACcAAAAAAAAAAAAAADEAAAAXAAAAAAAAAA==",
+              "ViewState": "AgIAADYAAAAAAAAAAAAAAEMAAAALAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2025-06-18T01:16:36.932Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "Board.cpp",
               "DocumentMoniker": "C:\\Users\\Mili\\Desktop\\monoopoly fr\\Monoopoly\\Monoopoly\\Board.cpp",
               "RelativeDocumentMoniker": "Monoopoly\\Board.cpp",
@@ -218,12 +221,11 @@
               "RelativeToolTip": "Monoopoly\\Board.cpp",
               "ViewState": "AgIAADEAAAAAAAAAAAAAAAYAAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-06-14T13:51:32.187Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-14T13:51:32.187Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "Board.h",
               "DocumentMoniker": "C:\\Users\\Mili\\Desktop\\monoopoly fr\\Monoopoly\\Monoopoly\\Board.h",
               "RelativeDocumentMoniker": "Monoopoly\\Board.h",
@@ -231,12 +233,11 @@
               "RelativeToolTip": "Monoopoly\\Board.h",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAGAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-06-14T13:49:09.523Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-14T13:49:09.523Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "MovePositionCard.h",
               "DocumentMoniker": "C:\\Users\\Mili\\Desktop\\monoopoly fr\\Monoopoly\\Monoopoly\\MovePositionCard.h",
               "RelativeDocumentMoniker": "Monoopoly\\MovePositionCard.h",
@@ -244,12 +245,11 @@
               "RelativeToolTip": "Monoopoly\\MovePositionCard.h",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-06-14T21:35:07.667Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-14T21:35:07.667Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 8,
               "Title": "GroupPaymentCard.h",
               "DocumentMoniker": "C:\\Users\\Mili\\Desktop\\monoopoly fr\\Monoopoly\\Monoopoly\\GroupPaymentCard.h",
               "RelativeDocumentMoniker": "Monoopoly\\GroupPaymentCard.h",
@@ -257,12 +257,11 @@
               "RelativeToolTip": "Monoopoly\\GroupPaymentCard.h",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAATAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-06-19T21:31:24.556Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-19T21:31:24.556Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 9,
               "Title": "Monoopoly.cpp",
               "DocumentMoniker": "C:\\Users\\Mili\\Desktop\\monoopoly fr\\Monoopoly\\Monoopoly\\Monoopoly.cpp",
               "RelativeDocumentMoniker": "Monoopoly\\Monoopoly.cpp",
@@ -270,12 +269,11 @@
               "RelativeToolTip": "Monoopoly\\Monoopoly.cpp",
               "ViewState": "AgIAAAIAAAAAAAAAAAAAAAoAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-06-13T09:06:44.244Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-13T09:06:44.244Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 2,
               "Title": "Field.h",
               "DocumentMoniker": "C:\\Users\\Mili\\Desktop\\monoopoly fr\\Monoopoly\\Monoopoly\\Field.h",
               "RelativeDocumentMoniker": "Monoopoly\\Field.h",
@@ -332,7 +330,8 @@
               "RelativeToolTip": "Monoopoly\\Constants.h",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAWAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-06-14T23:06:19.902Z"
+              "WhenOpened": "2025-06-14T23:06:19.902Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",

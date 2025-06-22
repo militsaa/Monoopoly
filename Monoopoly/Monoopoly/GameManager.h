@@ -13,9 +13,12 @@ class GameManager {
 
 	GameManager();
 
-	bool canBuild(int fieldInd, Property& prop)const;
+	bool canBuild(int fieldInd)const;
 	void collectNeighbour(Vector<Property*>& nb,
-		int fieldInd);
+		int fieldInd) const;
+	bool evenBuildRuleRespected(const Vector<Property*>& sameNb) const;
+	bool ownsWholeSet(const Vector<Property*>& sameNb) const;
+	int getFieldIndByName(String fieldName)const;
 
 public:
 	GameManager(const GameManager& other) = delete;
@@ -24,7 +27,7 @@ public:
 
 	Vector<Player*> getPlayers() const;
 	Vector<Field*> getFields() const;
-	bool buildCottage(Player& player, int idx);
+	void buildCottage(String fieldName);
 	void buildCastle();
 	//here estimate how many to pay for each prop when on it
 };
