@@ -131,6 +131,7 @@
     <ClCompile Include="Board.cpp" />
     <ClCompile Include="Card.cpp" />
     <ClCompile Include="CardDeck.cpp" />
+    <ClCompile Include="CardField.cpp" />
     <ClCompile Include="DeadField.cpp" />
     <ClCompile Include="Field.cpp" />
     <ClCompile Include="GameManager.cpp" />

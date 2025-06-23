@@ -19,9 +19,9 @@ public:
 	void addCastle();
 	void replaceWithCastle();
 	bool getHasCastle() const;
-	void setHasCastle(bool newState);
+	void sellCastle();
 	int getCottageCount() const;
-	void setCottageCoun(int count);
+	void sellCottages(int count);
 	Neighbourhood getNeighbourhood()const;
 	int getCottagePrice() const;
 	int rent()const override;

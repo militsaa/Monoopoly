@@ -1,7 +1,13 @@
 #include <iostream>
+//#include "GameManager.h"
+//#include "Vector.h"
 
 int main() {
-    std::cout << "Hello World!\n";
+	/*GameManager& gm = GameManager::getInstance();
+	Vector<GameManager*> v;
+	v.push_back(&gm);
+	v.push_back(&gm);
+	std::cout << v.getSize();*/
 }
 
 //impl cardDeck - vector<card> - add all //

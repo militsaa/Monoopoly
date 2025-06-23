@@ -137,7 +137,23 @@ void GameManager::handleTradePropForMoney(const String& want, const String& give
 	}
 }
 
-void GameManager::sellAllMorInNeighb(int fieldInd) // separate to func
+void GameManager::sellCastle(BuildableProperty* prop)
+{
+	prop->sellCastle();
+	int price = prop->getCottagePrice() * CASTLE_AS_COTT_CNT;
+	prop->getOwner()->addMoney(price / 2);
+	castlesLeft++;
+}
+
+void GameManager::sellCottages(BuildableProperty* prop, int count)
+{
+	castlesLeft += count;
+	prop->sellCottages(count);
+	int price = prop->getCottagePrice() * count;
+	prop->getOwner()->addMoney(price / 2);
+}
+
+void GameManager::sellAllMorInNeighb(int fieldInd)
 {
 	Vector<BuildableProperty*> neighb;
 	collectNeighbour(neighb, fieldInd);
@@ -145,18 +161,12 @@ void GameManager::sellAllMorInNeighb(int fieldInd) // separate to func
 	{
 		if (neighb[i]->getHasCastle())
 		{
-			neighb[i]->setHasCastle(false);
-			int price = neighb[i]->getCottagePrice() * CASTLE_AS_COTT_CNT;
-			neighb[i]->getOwner()->addMoney(price/2);
-			castlesLeft++;
+			sellCastle(neighb[i]);
 		}
 		else if (neighb[i]->getCottageCount())
 		{
 			int cnt = neighb[i]->getCottageCount();
-			castlesLeft += cnt;
-			neighb[i]->setCottageCoun(0);
-			int price = neighb[i]->getCottagePrice() * cnt;
-			neighb[i]->getOwner()->addMoney(price / 2);
+			sellCottages(neighb[i], cnt);
 		}
 	}
 }

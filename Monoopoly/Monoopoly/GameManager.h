@@ -28,6 +28,8 @@ class GameManager {
 	int getPlayerIndByName(const String& username)const;
 	void handleTradeMoneyForProp(const String& want, const String& give, int reseiverInd);
 	void handleTradePropForMoney(const String& want, const String& give, int reseiverInd);
+	void sellCastle(BuildableProperty* prop);
+	void sellCottages(BuildableProperty* prop, int count);
 	void sellAllMorInNeighb(int fieldInd);
 	bool askForConsent(const String&);
 
@@ -41,5 +43,5 @@ public:
 	void buildCottage(const String& fieldName);
 	void buildCastle(const String& fieldName);
 	void Trade();
-	//here estimate how many to pay for each prop when on it
+	
 };
