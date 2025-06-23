@@ -7,6 +7,9 @@
 bool isNumber(const String& str);
 bool isDigit(char ch);
 int strToInt(const String& str);
+int getNumAnswer();
+bool isNum2to6(const String& str);
+void clearConsole();
 
 class GameManager {
 	Vector<Player*> players;
@@ -32,6 +35,9 @@ class GameManager {
 	void sellCottages(BuildableProperty* prop, int count);
 	void sellAllMorInNeighb(int fieldInd);
 	bool askForConsent(const String&);
+	void rollTheDiesAndMove();
+
+	void setPlayers();
 
 public:
 	GameManager(const GameManager& other) = delete;
@@ -43,5 +49,7 @@ public:
 	void buildCottage(const String& fieldName);
 	void buildCastle(const String& fieldName);
 	void Trade();
+
+	void play();
 	
 };

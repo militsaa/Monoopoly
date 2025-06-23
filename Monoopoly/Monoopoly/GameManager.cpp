@@ -1,6 +1,7 @@
 #include "GameManager.h"
 #include "BuildableProperty.h"
 #include "Constants.h"
+#include "Random.h"
 
 GameManager::GameManager()
 {
@@ -100,7 +101,7 @@ void GameManager::handleTradeMoneyForProp(const String& want, const String& give
 		return;
 	}
 	BuildableProperty* prop = static_cast<BuildableProperty*>(board.getFields()[idx]);
-	if (prop->getOwner()!=players[currPlayer])
+	if (prop->getOwner() != players[currPlayer])
 	{
 		std::cout << "You can trade only your properties!\n";
 		return;
@@ -173,10 +174,32 @@ void GameManager::sellAllMorInNeighb(int fieldInd)
 
 bool GameManager::askForConsent(const String& name)
 {
-	std::cout << name<< " do you acept the offer? (y/n): ";
+	std::cout << name << " do you acept the offer? (y/n): ";
 	char answer;
 	std::cin >> answer;
 	return answer == 'y';
+}
+
+void GameManager::rollTheDiesAndMove()
+{
+	int first = dieGenerator(6);
+	int second = dieGenerator(6);
+	std::cout << first << "  " << second;
+	players[currPlayer]->changePosition((first + second));
+}
+
+void GameManager::setPlayers()
+{
+	std::cout << "How many players are going to play?";
+	int playersCnt = getNumAnswer();
+	for (size_t i = 0; i < playersCnt; i++)
+	{
+		std::cout << "Player " << i << " username: ";
+		String username;
+		std::cin >> username;
+		players.push_back(new Player(username));
+		clearConsole();
+	}
 }
 
 bool GameManager::canBuildCottage(int fieldInd) const
@@ -231,7 +254,7 @@ bool GameManager::canBuildCastle(int fieldInd) const
 	if (!prop->isBought() ||
 		!prop->isOwnedBy(*players[currPlayer]) ||
 		prop->getHasCastle() ||
-		prop->getCottageCount() != 4 ||  
+		prop->getCottageCount() != 4 ||
 		players[currPlayer]->getBalance() < prop->getCottagePrice())
 		return false;
 
@@ -297,11 +320,11 @@ void GameManager::buildCastle(const String& fieldName)
 	}
 
 	BuildableProperty* prop = static_cast<BuildableProperty*>(board.getFields()[fieldInd]);
-	prop->addCastle();                                       
-	players[currPlayer]->giveMoney(prop->getCottagePrice()); 
+	prop->addCastle();
+	players[currPlayer]->giveMoney(prop->getCottagePrice());
 
 	cottagesLeft += 4;
-	--castlesLeft;     
+	--castlesLeft;
 
 	std::cout << "Castle built successfully on " << fieldName << "!\n";
 }
@@ -313,9 +336,9 @@ void GameManager::Trade()
 	String give;
 	std::cout << reseiver << want << give;
 	int reseiverInd = getPlayerIndByName(reseiver);
-	if (reseiverInd<0)
+	if (reseiverInd < 0)
 	{
-		std::cout << ""; 
+		std::cout << "";
 		return;
 	}
 	if (isNumber(want))
@@ -329,6 +352,11 @@ void GameManager::Trade()
 	else {
 		std::cout << "Incorrect data!\n";
 	}
+}
+
+void GameManager::play()
+{
+	setPlayers();
 }
 
 bool isNumber(const String& str)
@@ -357,4 +385,34 @@ int strToInt(const String& str)
 		res = res * 10 + curr;
 	}
 	return res;
+}
+
+int getNumAnswer()
+{
+	String answer;
+	std::cin >> answer;
+	while (!isNum2to6(answer))
+	{
+		std::cout << "Please enter a valid symbol! ";
+		clearConsole();
+		std::cin >> answer;
+	}
+	clearConsole();
+	return strToInt(answer);
+}
+
+bool isNum2to6(const String& str)
+{
+	if (!isNumber(str))
+	{
+		return false;
+	}
+	int num = strToInt(str);
+	return num >= 2 && num <= 6;
+}
+
+void clearConsole()
+{
+	std::cin.clear();
+	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 }

@@ -3,10 +3,7 @@
 #include "GameManager.h"
 #include "BuildableProperty.h"
 
-Player::Player()
-{
-	//TODO
-}
+Player::Player(String userName) : userName(userName), balance(BEG_BALANCE) {}
 
 int Player::getBalance() const
 {
@@ -16,7 +13,6 @@ int Player::getBalance() const
 void Player::buyProp(int tax)
 {
 	balance -= tax;
-	//if add vector add in the vector
 }
 
 void Player::collectRent(int rent)
@@ -38,6 +34,15 @@ void Player::giveMoney(int amount)
 int Player::getPosition() const
 {
 	return possition;
+}
+
+int Player::changePosition(int change)
+{
+	possition += change;
+	if (possition>=FIELDS_COUNT)
+	{
+		possition -= FIELDS_COUNT;
+	}
 }
 
 void Player::setPosition(int index)

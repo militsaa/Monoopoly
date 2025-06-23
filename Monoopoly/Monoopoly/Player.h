@@ -4,19 +4,20 @@
 
 class Player {
 	String userName;
-	int possition;
+	int possition = 0;
 	int balance;
-	bool inJail;
+	bool inJail = false;
 	int jailTurns=0;
 
 public:
-	Player();
+	Player(String userName);
 	int getBalance() const;
 	void buyProp(int tax);
 	void collectRent(int rent);
 	void addMoney(int tax);
 	void giveMoney(int amount);
 	int getPosition() const;
+	int changePosition(int change);
 	void setPosition(int index);
 	void movePosition(int steps);
 	String getUserName()const;

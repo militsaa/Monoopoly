@@ -21,3 +21,5 @@ int main() {
 
 //have limited cottages and castles
 //doesnt have bank
+
+//func message
