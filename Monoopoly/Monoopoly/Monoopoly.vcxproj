@@ -152,6 +152,7 @@
     <ClInclude Include="Board.h" />
     <ClInclude Include="Card.h" />
     <ClInclude Include="CardDeck.h" />
+    <ClInclude Include="CardField.h" />
     <ClInclude Include="Constants.h" />
     <ClInclude Include="Field.h" />
     <ClInclude Include="GameManager.h" />

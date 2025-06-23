@@ -31,6 +31,12 @@ Player* Property::getOwner() const
 	return owner;
 }
 
+void Property::setOwner(Player* player)
+{
+	owner = player;
+}
+
+
 void Property::returnProperty()
 {
 	owner = nullptr;

@@ -134,5 +134,8 @@
     <ClInclude Include="Station.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="CardField.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

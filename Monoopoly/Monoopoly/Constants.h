@@ -12,4 +12,5 @@ const int WATER_WORKS_IND = 28;
 const int STATION_PRICE = 200;
 const int STATION_BASE_RENT = 25;
 const int STATION_COUNT = 4;
-const int STATIONS_INDEXES [STATION_COUNT] = {5,15,25,35};
+const int STATIONS_INDEXES[STATION_COUNT] = { 5,15,25,35 };
+const int CASTLE_AS_COTT_CNT = 5;

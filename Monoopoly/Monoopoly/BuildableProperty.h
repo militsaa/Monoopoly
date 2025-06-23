@@ -16,15 +16,13 @@ public:
 	BuildableProperty(String name, FieldType field, PropertyType type, int price, Neighbourhood n, int baseRent);
 	BuildableProperty* clone() const override;
 	void addCottage();
+	void addCastle();
 	void replaceWithCastle();
 	bool getHasCastle() const;
+	void setHasCastle(bool newState);
 	int getCottageCount() const;
+	void setCottageCoun(int count);
 	Neighbourhood getNeighbourhood()const;
 	int getCottagePrice() const;
 	int rent()const override;
-	//void payToOwner()
-	/*void addCottage();
-	bool hasMaxCottages() const;
-	void replaceWithCastle();
-	bool hasCastleBuilt() const;*/
 };

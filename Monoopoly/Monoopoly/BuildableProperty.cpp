@@ -14,6 +14,12 @@ void BuildableProperty::addCottage()
 	cottageCount++;
 }
 
+void BuildableProperty::addCastle()
+{
+	cottageCount = 0;
+	hasCastle = true;
+}
+
 void BuildableProperty::replaceWithCastle()
 {
 	cottageCount = 0;
@@ -25,9 +31,22 @@ bool BuildableProperty::getHasCastle() const
 	return cottageCount;
 }
 
+void BuildableProperty::setHasCastle(bool newState)
+{
+	hasCastle = newState;
+}
+
 int BuildableProperty::getCottageCount() const
 {
 	return cottageCount;
+}
+
+void BuildableProperty::setCottageCoun(int count)
+{
+	if (count<=4)
+	{
+		cottageCount = count;
+	}
 }
 
 Neighbourhood BuildableProperty::getNeighbourhood() const

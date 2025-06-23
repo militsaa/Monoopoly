@@ -26,9 +26,9 @@ class String {
 	void copyFrom(const String&);
 	void makeDynamic();
 	void makeStatic();
-	size_t getLenght() const;
 
 public:
+	size_t getLenght() const;
 	String() = default;
 	String(const String&);
 	String(const char*);

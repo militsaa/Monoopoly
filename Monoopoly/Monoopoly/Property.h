@@ -14,16 +14,13 @@ protected:
 
 public:
 	Property(String name, FieldType t, PropertyType type, int price);
+	~Property() = default;
 	Property* clone() const override;
 	bool isBought() const; //check if player is nullptr
 	void buy(Player& player);
 	Player* getOwner()const;
+	void setOwner(Player*);
 	void returnProperty();
 	bool isOwnedBy(const Player& p) const;
 	virtual int rent()const;
-	//void payToOwner()
-	/*void addCottage();
-	bool hasMaxCottages() const;
-	void replaceWithCastle();
-	bool hasCastleBuilt() const;*/
 };
