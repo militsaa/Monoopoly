@@ -16,7 +16,7 @@ int Station::rent() const
 	Station* curr;
 	for (size_t i = 0; i < STATION_COUNT; i++)
 	{
-		curr = static_cast<Station*>(gm.getFields()[ELECTRIC_COMPANY_IND]);
+		curr = static_cast<Station*>(gm.getFields()[STATIONS_INDEXES[i]]);
 		if (owner == curr->getOwner())
 		{
 			cnt++;

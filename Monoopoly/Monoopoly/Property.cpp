@@ -16,9 +16,13 @@ bool Property::isBought() const
 
 void Property::buy(Player& player)
 {
-	if (player.getBalance() >= price)
+	if (isBought)
 	{
-		player.buyProp(price);
+		std::cout << "Already bought!\n";
+		return;
+	}
+	if (player.buyProp(price))
+	{
 		owner = &player;
 	}
 	else {
@@ -36,6 +40,11 @@ void Property::setOwner(Player* player)
 	owner = player;
 }
 
+int Property::getPrice() const
+{
+	return price;
+}
+
 
 void Property::returnProperty()
 {
@@ -44,7 +53,12 @@ void Property::returnProperty()
 
 bool Property::isOwnedBy(const Player& p) const
 {
-	return owner == &p;
+	return false;
+}
+
+PropertyType Property::getPropertyType() const
+{
+	return type;
 }
 
 int Property::rent() const
@@ -55,7 +69,18 @@ int Property::rent() const
 
 	if (fstUtility->getOwner() == secUtility->getOwner())
 	{
-		//to do die*10  else 4*die
+		return 10;
+	}
+	return 4;
+}
+
+int Property::stepedOnProp() const
+{
+	if (!isBought())
+	{
+		std::cout << "You can buy this property if you want!";
 		return 0;
 	}
+	return rent();
 }
+

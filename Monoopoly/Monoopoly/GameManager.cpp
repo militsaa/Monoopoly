@@ -2,6 +2,7 @@
 #include "BuildableProperty.h"
 #include "Constants.h"
 #include "Random.h"
+#include "CommandReactFactory.h"
 
 GameManager::GameManager()
 {
@@ -188,6 +189,30 @@ void GameManager::rollTheDiesAndMove()
 	players[currPlayer]->changePosition((first + second));
 }
 
+int GameManager::stepOnNewField()
+{
+	int fieldIdx = players[currPlayer]->getPosition();
+	Field* field = static_cast<Field*>(getFields()[fieldIdx]);
+	if (field->getType() == FieldType::PROPERTY)
+		Field* field = static_cast<Field*>(getFields()[fieldIdx]);
+	{
+		Property* prop = static_cast<Property*>(field);
+		return prop->stepedOnProp();
+	}
+}
+
+void GameManager::buyProperty()
+{
+	int currPoss = players[currPlayer]->getPosition();
+	if (getFields()[currPoss]->getType() != FieldType::PROPERTY)
+	{
+		std::cout << "You can buy only properties!\n";
+		return;
+	}
+	Property* prop = static_cast<Property*>(getFields()[currPoss]);
+	prop->buy(*players[currPlayer]);
+}
+
 void GameManager::setPlayers()
 {
 	std::cout << "How many players are going to play?";
@@ -287,6 +312,11 @@ Vector<Field*> GameManager::getFields() const
 	return board.getFields();
 }
 
+Player* GameManager::getCurrPlayer() const
+{
+	return players[currPlayer];
+}
+
 void GameManager::buildCottage(const String& fieldName)
 {
 	int fieldInd = getFieldIndByName(fieldName);
@@ -357,6 +387,25 @@ void GameManager::Trade()
 void GameManager::play()
 {
 	setPlayers();
+	String command;
+	bool rolled;
+	int dept;
+	while (true)
+	{
+		CommandReactFactory::action(command, rolled, dept);
+		//check if all are bankrupt 
+		if (dept >= 0)
+		{
+			std::cin >> command;
+			clearConsole();
+		}
+		else
+		{
+			rolled = false;
+			dept = 0;
+			currPlayer == players.getSize() - 1 ? currPlayer = 0 : currPlayer++;
+		}
+	}
 }
 
 bool isNumber(const String& str)

@@ -88,19 +88,14 @@ int BuildableProperty::rent() const
 	{
 		return baseRent;
 	}
-	else
+	else if (hasCastle)
 	{
-		//todo???
+		return baseRent * FOUR_COTTAGES_FACTOR * CASTLE_FACTOR;
 	}
-}
-
-int estimateUtilityRent(BuildableProperty* current)
-{ 
-	//ok li e sravnenieto
-	GameManager& gm = GameManager::getInstance();
-	/*if (current->getOwner()==gm.getFields()[
+	double rent = baseRent;
+	for (size_t i = 0; i < cottageCount; i++)
 	{
-
-	}*/
-	return 0;
-}
+		rent *= (1+COTTAGE_FACTOR);
+	}
+	return rent;
+} // mai ne e dobre

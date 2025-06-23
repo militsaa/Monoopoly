@@ -20,7 +20,10 @@ public:
 	void buy(Player& player);
 	Player* getOwner()const;
 	void setOwner(Player*);
+	int getPrice() const;
 	void returnProperty();
 	bool isOwnedBy(const Player& p) const;
+	PropertyType getPropertyType() const;
 	virtual int rent()const;
+	int stepedOnProp()const;
 };

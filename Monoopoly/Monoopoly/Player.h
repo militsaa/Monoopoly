@@ -12,7 +12,7 @@ class Player {
 public:
 	Player(String userName);
 	int getBalance() const;
-	void buyProp(int tax);
+	bool buyProp(int tax);
 	void collectRent(int rent);
 	void addMoney(int tax);
 	void giveMoney(int amount);

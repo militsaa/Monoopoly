@@ -22,8 +22,7 @@ class GameManager {
 
 	bool canBuildCottage(int fieldInd)const;
 	bool canBuildCastle(int fieldInd)const;
-	void collectNeighbour(Vector<BuildableProperty*>& nb,
-		int fieldInd) const;
+	void collectNeighbour(Vector<BuildableProperty*>& nb, int fieldInd) const;
 	bool evenBuildRuleRespected(const Vector<BuildableProperty*>& sameNb) const;
 	bool readyForCastle(Vector<BuildableProperty*> neighb) const;
 	bool ownsWholeSet(const Vector<BuildableProperty*>& sameNb) const;
@@ -34,22 +33,24 @@ class GameManager {
 	void sellCastle(BuildableProperty* prop);
 	void sellCottages(BuildableProperty* prop, int count);
 	void sellAllMorInNeighb(int fieldInd);
-	bool askForConsent(const String&);
-	void rollTheDiesAndMove();
 
 	void setPlayers();
+	bool askForConsent(const String&);
 
 public:
 	GameManager(const GameManager& other) = delete;
 	GameManager& operator=(const GameManager& other) = delete;
 	static GameManager& getInstance();
-
 	Vector<Player*> getPlayers() const;
 	Vector<Field*> getFields() const;
+	//Player* getCurrPlayer() const;
 	void buildCottage(const String& fieldName);
 	void buildCastle(const String& fieldName);
-	void Trade();
 
+	void Trade();
+	void rollTheDiesAndMove();
+	int stepOnNewField();
+	void buyProperty();
 	void play();
 	
 };

@@ -10,9 +10,17 @@ int Player::getBalance() const
     return balance;
 }
 
-void Player::buyProp(int tax)
+bool Player::buyProp(int tax)
 {
-	balance -= tax;
+	if (balance<tax)
+	{
+		return false;
+	}
+	else 
+	{
+		giveMoney(tax);
+		return true;
+	}
 }
 
 void Player::collectRent(int rent)

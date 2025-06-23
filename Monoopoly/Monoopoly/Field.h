@@ -4,6 +4,7 @@
 enum class FieldType { PROPERTY, CARDFIELD, GOTOJAIL, JAIL, GO, PARKING, TAXFIELD };
 
 class Field {
+protected:
 	FieldType type;
 	String name;
 public:

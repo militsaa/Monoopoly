@@ -133,6 +133,7 @@
     <ClCompile Include="CardDeck.cpp" />
     <ClCompile Include="CardField.cpp" />
     <ClCompile Include="DeadField.cpp" />
+    <ClCompile Include="CommandReactFactory.cpp" />
     <ClCompile Include="Field.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="GoField.cpp" />
@@ -155,6 +156,7 @@
     <ClInclude Include="CardDeck.h" />
     <ClInclude Include="CardField.h" />
     <ClInclude Include="Constants.h" />
+    <ClInclude Include="CommandReactFactory.h" />
     <ClInclude Include="Field.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="GoField.h" />
