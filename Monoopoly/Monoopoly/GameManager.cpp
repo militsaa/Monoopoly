@@ -93,6 +93,46 @@ int GameManager::getPlayerIndByName(const String& username) const
 	return -1;
 }
 
+bool GameManager::canSell() const
+{
+	return false;
+}
+
+bool GameManager::canSellCastle(Vector<BuildableProperty*> neighb)
+{
+	const int baseInd = 0;
+	if (cottagesLeft < 4)
+	{
+		return false;
+	}
+	for (size_t i = 1; i < neighb.getSize(); i++)
+	{
+		if (!(neighb[i]->getHasCastle() || neighb[i]->getCottageCount() == 4))
+		{
+			return false;
+		}
+	}
+	return true;
+}
+
+bool GameManager::canSellCottage(Vector<BuildableProperty*> neighb)
+{
+	const int baseInd = 0;
+	if (!neighb[baseInd]->getCottageCount())
+	{
+		return false;
+	}
+	for (size_t i = 1; i < neighb.getSize(); i++)
+	{
+		int difference = neighb[baseInd] - neighb[1] - 1;
+		if (difference < -1 || difference>1)
+		{
+			return false;
+		}
+	}
+	return true;
+}
+
 void GameManager::handleTradeMoneyForProp(const String& want, const String& give, int reseiverInd) // 2 ednakvi funcs!!!
 {
 	int idx = getFieldIndByName(give);
@@ -173,6 +213,20 @@ void GameManager::sellAllMorInNeighb(int fieldInd)
 	}
 }
 
+void GameManager::playDept(int dept)
+{
+	int fieldInd = players[currPlayer]->getPosition();
+	Field* field = getFields()[fieldInd];
+	if (field->getType()!=FieldType::PROPERTY)
+	{
+		players[currPlayer]->giveMoney(dept);
+		return;
+	}
+	Property* prop = static_cast<Property*>(getFields()[fieldInd]);
+	players[currPlayer]->giveMoney(dept);
+	prop->getOwner()->addMoney(dept);
+}
+
 bool GameManager::askForConsent(const String& name)
 {
 	std::cout << name << " do you acept the offer? (y/n): ";
@@ -194,7 +248,7 @@ int GameManager::stepOnNewField()
 	int fieldIdx = players[currPlayer]->getPosition();
 	Field* field = static_cast<Field*>(getFields()[fieldIdx]);
 	if (field->getType() == FieldType::PROPERTY)
-		Field* field = static_cast<Field*>(getFields()[fieldIdx]);
+		//Field* field = static_cast<Field*>(getFields()[fieldIdx]);
 	{
 		Property* prop = static_cast<Property*>(field);
 		return prop->stepedOnProp();
@@ -211,6 +265,43 @@ void GameManager::buyProperty()
 	}
 	Property* prop = static_cast<Property*>(getFields()[currPoss]);
 	prop->buy(*players[currPlayer]);
+}
+
+void GameManager::sell()
+{
+	String property;
+	String type;
+	std::cin >> property >> type;
+	int idx = getFieldIndByName(property);
+	if (idx < 0)
+	{
+		return;
+	}
+	else if (board.getFields()[idx]->getType() != FieldType::PROPERTY)
+	{
+		return;
+	}
+	Vector<BuildableProperty*> neighb;
+	collectNeighbour(neighb, idx);
+	if (!ownsWholeSet(neighb))
+	{
+		return;
+	}
+	if (type == "castle")
+	{
+		if (canSellCastle(neighb))
+		{
+			sellCastle(neighb[0]);
+		}
+	}
+	else if (type == "cottage")
+	{
+		if (canSellCottage(neighb))
+		{
+			sellCottages(neighb[0], 1);
+		}
+	}
+	return;
 }
 
 void GameManager::setPlayers()
@@ -359,7 +450,7 @@ void GameManager::buildCastle(const String& fieldName)
 	std::cout << "Castle built successfully on " << fieldName << "!\n";
 }
 
-void GameManager::Trade()
+void GameManager::trade()
 {
 	String reseiver;
 	String want;
@@ -390,11 +481,19 @@ void GameManager::play()
 	String command;
 	bool rolled;
 	int dept;
+
 	while (true)
 	{
 		CommandReactFactory::action(command, rolled, dept);
 		//check if all are bankrupt 
-		if (dept >= 0)
+		if (dept > 0)
+		{
+			if (players[currPlayer]->getBalance() >= dept)
+			{
+				playDept(dept);
+			}
+		}
+		if (dept == 0)
 		{
 			std::cin >> command;
 			clearConsole();

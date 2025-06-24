@@ -2,10 +2,10 @@
 #include "GameManager.h"
 
 void CommandReactFactory::action(const String& command, bool& rolled, int& dept)
-{ //CHECK IF IN  JAIL!!!
+{
 	GameManager& gm = GameManager::getInstance();
 	if (command == "ROLL")
-	{
+	{	//check for prizon
 		if (dept || rolled)
 		{
 			std::cout << "You cannot roll!\n";
@@ -39,11 +39,11 @@ void CommandReactFactory::action(const String& command, bool& rolled, int& dept)
 	}
 	else if (command == "SELL")
 	{
-
+		gm.sell();
 	}
 	else if (command == "TRADE")
 	{
-
+		gm.trade();
 	}
 	else if (command == "PAYJAIL")
 	{

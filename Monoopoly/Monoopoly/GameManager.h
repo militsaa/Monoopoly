@@ -28,11 +28,16 @@ class GameManager {
 	bool ownsWholeSet(const Vector<BuildableProperty*>& sameNb) const;
 	int getFieldIndByName(const String& fieldName)const;
 	int getPlayerIndByName(const String& username)const;
+	bool canSell()const;
+	bool canSellCastle(Vector<BuildableProperty*> neighb);
+	bool canSellCottage(Vector<BuildableProperty*> neighb);
 	void handleTradeMoneyForProp(const String& want, const String& give, int reseiverInd);
 	void handleTradePropForMoney(const String& want, const String& give, int reseiverInd);
 	void sellCastle(BuildableProperty* prop);
 	void sellCottages(BuildableProperty* prop, int count);
 	void sellAllMorInNeighb(int fieldInd);
+	void playDept(int dept);
+
 
 	void setPlayers();
 	bool askForConsent(const String&);
@@ -47,10 +52,11 @@ public:
 	void buildCottage(const String& fieldName);
 	void buildCastle(const String& fieldName);
 
-	void Trade();
+	void trade();
 	void rollTheDiesAndMove();
 	int stepOnNewField();
 	void buyProperty();
+	void sell();
 	void play();
 	
 };
