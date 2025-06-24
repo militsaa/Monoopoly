@@ -54,7 +54,7 @@ bool GameManager::readyForCastle(Vector<BuildableProperty*> neighb) const
 {
 	for (size_t i = 0; i < neighb.getSize(); i++)
 	{
-		if (neighb[i]->getCottageCount() != 4)
+		if (!(neighb[i]->getCottageCount() == 4 || neighb[i]->getHasCastle()))
 		{
 			return false;
 		}
@@ -150,12 +150,12 @@ void GameManager::handleTradeMoneyForProp(int sum, int fieldInd, int reseiverInd
 		return;
 	}
 	BuildableProperty* prop = static_cast<BuildableProperty*>(board.getFields()[fieldInd]);
-	if (prop->getOwner() != players[currPlayer])
+	if (prop->getOwner() != players[reseiverInd])
 	{
 		std::cout << "You can trade only your properties!\n";
 		return;
 	}
-	if (players[reseiverInd]->getBalance() < sum)
+	if (players[currPlayer]->getBalance() < sum)
 	{
 		std::cout << "You don't have enough money to trade!\n";
 		return;
@@ -177,7 +177,7 @@ void GameManager::handleTradePropForMoney(int fieldInd, int sum, int reseiverInd
 		return;
 	}
 	BuildableProperty* prop = static_cast<BuildableProperty*>(board.getFields()[fieldInd]);
-	if (prop->getOwner() != players[reseiverInd])
+	if (prop->getOwner() != players[currPlayer])
 	{
 		std::cout << "Incorrect data!";
 		return;
@@ -216,6 +216,11 @@ void GameManager::sellAllMorInNeighb(int fieldInd)
 {
 	Vector<BuildableProperty*> neighb;
 	collectNeighbour(neighb, fieldInd);
+	// to delete
+	std::cout << neighb[0]->getHasCastle() << " " << neighb[0]->getCottageCount() << "\n";
+	std::cout << neighb[1]->getHasCastle() << " " << neighb[1]->getCottageCount() << "\n";
+	//
+
 	for (size_t i = 0; i < neighb.getSize(); i++)
 	{
 		if (neighb[i]->getHasCastle())
@@ -228,6 +233,9 @@ void GameManager::sellAllMorInNeighb(int fieldInd)
 			sellCottages(neighb[i], cnt);
 		}
 	}
+	// to delete
+	std::cout << neighb[0]->getHasCastle() << " " << neighb[0]->getCottageCount() << "\n";
+	std::cout << neighb[1]->getHasCastle() << " " << neighb[1]->getCottageCount() << "\n";
 }
 
 void GameManager::payDeptFromCard(int dept)
@@ -260,8 +268,10 @@ bool GameManager::askForConsent(const String& name)
 
 bool GameManager::rollTheDiesAndMove(bool& rolled)
 {
-	int first = dieGenerator(6);
-	int second = dieGenerator(6);
+	/*int first = dieGenerator(6);
+	int second = dieGenerator(6);*/
+	int first = 2;
+	int second = 4;
 	if (handlePairOfDice(first, second, rolled))
 	{
 		return true;
@@ -342,16 +352,17 @@ void GameManager::build()
 
 void GameManager::sell()
 {
-	String property;
 	String type;
-	std::cin >> property >> type;
-	int idx = getFieldIndByName(property);
-	if (idx < 0)
+	int idx;
+	std::cin >> type >> idx;
+	if (idx < 0 || idx >= FIELDS_COUNT) 
 	{
+		std::cout << "There is no such field!\n";
 		return;
 	}
 	else if (board.getFields()[idx]->getType() != FieldType::PROPERTY)
 	{
+		std::cout << "This is not property field!\n";
 		return;
 	}
 	Vector<BuildableProperty*> neighb;
@@ -360,19 +371,29 @@ void GameManager::sell()
 	{
 		return;
 	}
-	if (type == "castle")
+	if (type == "CASTLE")
 	{
 		if (canSellCastle(neighb))
 		{
 			sellCastle(neighb[0]);
+			std::cout << "Castle sold successfully!\n";
+			return;
 		}
+		std::cout << "Cannot sell the castle!\n";
 	}
-	else if (type == "cottage")
+	else if (type == "COTTAGE")
 	{
 		if (canSellCottage(neighb))
 		{
 			sellCottages(neighb[0], 1);
+			std::cout << "Cottage sold successfully!\n";
+			return;
 		}
+		std::cout << "Cannot sell the cottage!\n";
+	}
+	else
+	{
+		std::cout << "Incorrect data!\n";
 	}
 	return;
 }
@@ -401,12 +422,12 @@ void GameManager::setPlayers()
 	Property* prop = static_cast<Property*> (getFields()[1]);
 	prop->setOwner(players[0]);
 	Property* prop2 = static_cast<Property*> (getFields()[3]);
-	prop->setOwner(players[0]);
+	prop2->setOwner(players[0]);
 
 	Property* prop3 = static_cast<Property*> (getFields()[39]);
-	prop->setOwner(players[1]);
+	prop3->setOwner(players[1]);
 	Property* prop4 = static_cast<Property*> (getFields()[37]);
-	prop->setOwner(players[0]);
+	prop4->setOwner(players[0]);
 }
 
 bool GameManager::canBuildCottage(int fieldInd) const
@@ -506,14 +527,14 @@ void GameManager::removeActivePlayer()
 
 void GameManager::buildCottage(int fieldIdx)
 {
-	if (fieldIdx < 0)
+	if (fieldIdx < 0 || fieldIdx >= FIELDS_COUNT)
 	{
 		std::cout << "There is no such field!\n";
 		return;
 	}
 	if (!canBuildCottage(fieldIdx))
 	{
-		std::cout << "You cannot build a cottage!\n";
+		std::cout << "You cannot build a cottage there!\n";
 		return;
 	}
 	BuildableProperty* prop = static_cast<BuildableProperty*>(board.getFields()[fieldIdx]);
@@ -525,12 +546,14 @@ void GameManager::buildCottage(int fieldIdx)
 
 void GameManager::buildCastle(int fieldIdx)
 {
-	if (fieldIdx < 0) {
+	if (fieldIdx < 0 || fieldIdx>=FIELDS_COUNT) 
+	{
 		std::cout << "There is no such field!\n";
 		return;
 	}
-	if (!canBuildCastle(fieldIdx)) {
-		std::cout << "You cannot build a castle on " << getFields()[fieldIdx]->getName() << "!\n";
+	if (!canBuildCastle(fieldIdx)) 
+	{
+		std::cout << "You cannot build a castle there!\n";
 		return;
 	}
 
@@ -603,7 +626,7 @@ void GameManager::tradeForProp()
 	int money = 0;
 	int fieldInd = 0;
 	String reseiver;
-	std::cout << money << fieldInd << reseiver;
+	std::cin >> money >> fieldInd >> reseiver;
 	int reseiverInd = getPlayerIndByName(reseiver);
 	if (reseiverInd < 0)
 	{
@@ -618,14 +641,14 @@ void GameManager::tradeForMoney()
 	int fieldInd = 0;
 	int money = 0;
 	String reseiver;
-	std::cout << money << fieldInd << reseiver;
+	std::cin >> money >> fieldInd >> reseiver;
 	int reseiverInd = getPlayerIndByName(reseiver);
 	if (reseiverInd < 0)
 	{
 		std::cout << "";
 		return;
 	}
-	handleTradePropForMoney(money, fieldInd, reseiverInd);
+	handleTradePropForMoney( fieldInd, money, reseiverInd);
 }
 
 void GameManager::play()
@@ -650,6 +673,7 @@ void GameManager::play()
 					return;
 				}
 				payDept(dept);
+				dept = 0;
 			}
 		}
 		if (dept == 0 && !justGotInPrison)
