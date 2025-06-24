@@ -64,7 +64,8 @@ bool GameManager::readyForCastle(Vector<BuildableProperty*> neighb) const
 bool GameManager::ownsWholeSet(const Vector<BuildableProperty*>& sameNb) const
 {
 	for (size_t i = 1; i < sameNb.getSize(); ++i) {
-		if (!sameNb[i]->isOwnedBy(*players[currPlayer])) {
+		if (!sameNb[i]->isOwnedBy(players[currPlayer])) {
+		std::cout << sameNb[i]->getOwner()->getUserName();
 			return false;
 		}
 	}
@@ -322,14 +323,14 @@ void GameManager::buyProperty()
 
 void GameManager::build()
 {
-	int idx;
 	String type;
-	std::cin >> idx >> type;
-	if (type == "castle")
+	int idx;
+	std::cin >> type >> idx;
+	if (type == "COTTAGE")
 	{
 		buildCottage(idx);
 	}
-	else if (type == "castle")
+	else if (type == "CASTLE")
 	{
 		buildCastle(idx);
 	}
@@ -396,6 +397,16 @@ void GameManager::setPlayers()
 		players.push_back(new Player(username));
 		clearConsole();
 	}
+	// to delete
+	Property* prop = static_cast<Property*> (getFields()[1]);
+	prop->setOwner(players[0]);
+	Property* prop2 = static_cast<Property*> (getFields()[3]);
+	prop->setOwner(players[0]);
+
+	Property* prop3 = static_cast<Property*> (getFields()[39]);
+	prop->setOwner(players[1]);
+	Property* prop4 = static_cast<Property*> (getFields()[37]);
+	prop->setOwner(players[0]);
 }
 
 bool GameManager::canBuildCottage(int fieldInd) const
@@ -414,7 +425,7 @@ bool GameManager::canBuildCottage(int fieldInd) const
 
 	BuildableProperty* prop = static_cast<BuildableProperty*>(board.getFields()[fieldInd]);
 
-	if (!prop->isBought() || !prop->isOwnedBy(*players[currPlayer]) ||
+	if (!prop->isBought() || !prop->isOwnedBy(players[currPlayer]) ||
 		prop->getHasCastle() || prop->getCottageCount() == 4 || players[currPlayer]->getBalance() < prop->getCottagePrice())
 		return false;
 
@@ -448,7 +459,7 @@ bool GameManager::canBuildCastle(int fieldInd) const
 	BuildableProperty* prop = static_cast<BuildableProperty*>(board.getFields()[fieldInd]);
 
 	if (!prop->isBought() ||
-		!prop->isOwnedBy(*players[currPlayer]) ||
+		!prop->isOwnedBy(players[currPlayer]) ||
 		prop->getHasCastle() ||
 		prop->getCottageCount() != 4 ||
 		players[currPlayer]->getBalance() < prop->getCottagePrice())

@@ -28,7 +28,7 @@ void BuildableProperty::replaceWithCastle()
 
 bool BuildableProperty::getHasCastle() const
 {
-	return cottageCount;
+	return hasCastle;
 }
 
 void BuildableProperty::sellCastle()

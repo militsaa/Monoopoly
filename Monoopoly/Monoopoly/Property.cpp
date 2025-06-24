@@ -52,9 +52,9 @@ void Property::returnProperty()
 	owner = nullptr;
 }
 
-bool Property::isOwnedBy(const Player& p) const
+bool Property::isOwnedBy(const Player* p) const
 {
-	return false;
+	return p == owner;
 }
 
 PropertyType Property::getPropertyType() const
