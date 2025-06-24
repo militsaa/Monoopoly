@@ -1,7 +1,7 @@
 #include "CommandReactFactory.h"
 #include "GameManager.h"
 
-void CommandReactFactory::action(const String& command, bool& rolled, bool& justGotInPrison, int& dept, bool& onTurn)
+void CommandReactFactory::action(const String& command, bool& rolled, bool& rolledOnce, bool& justGotInPrison, int& dept, bool& onTurn)
 {
 	GameManager& gm = GameManager::getInstance();
 	if (command == "ROLL")
@@ -16,13 +16,13 @@ void CommandReactFactory::action(const String& command, bool& rolled, bool& just
 			std::cout << "You cannot roll!\n";
 			return;
 		}
-		if (gm.rollTheDiesAndMove())
+		rolledOnce = true;
+		if (gm.rollTheDiesAndMove(rolled))
 		{
 			justGotInPrison = true;
 			return;
 		}
-		rolled = true;
-		dept = gm.stepOnNewField(dept);
+		dept = gm.stepOnNewField();
 	}
 	else if (command == "END")
 	{
@@ -39,7 +39,7 @@ void CommandReactFactory::action(const String& command, bool& rolled, bool& just
 		{
 			return;
 		}
-		if (!rolled || dept > 0)
+		if (!rolledOnce || dept > 0)
 		{
 			std::cout << "You cannot buy a property right now!\n";
 			return;

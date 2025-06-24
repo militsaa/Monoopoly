@@ -3,9 +3,8 @@
 
 class MovePositionCard : public Card {
 	int steps;
-	//bool shouldCollectGo;
 public:
 	MovePositionCard(CardType type, String description, int steps);
-	void applyEffect(Player& player) const override;
+	int applyEffect(Player& player) const override;
 	MovePositionCard* clone() const override;
 };

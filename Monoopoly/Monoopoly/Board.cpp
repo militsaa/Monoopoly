@@ -8,11 +8,11 @@
 
 Board::Board()
 {
-	fields.push_back(new GoField("Go", FieldType::GO, 200));
+	fields.push_back(new GoField("Go", FieldType::GO, 200, "Collect 200"));
 	fields.push_back(new BuildableProperty("Old Kent Road", FieldType::PROPERTY, PropertyType::BUILDABLE_PROPERTY, 60,Neighbourhood::BROWN, 2));
 	fields.push_back(new CardField("Community chest", FieldType::CARDFIELD));
 	fields.push_back(new BuildableProperty("Whitechapel Road", FieldType::PROPERTY, PropertyType::BUILDABLE_PROPERTY, 60, Neighbourhood::BROWN, 4));
-	fields.push_back(new TaxField("INCOME TAX", FieldType::TAXFIELD, 200));
+	fields.push_back(new TaxField("INCOME TAX", FieldType::TAXFIELD, 200, "Pay 200!"));
 	fields.push_back(new Station("Marylebone Station", FieldType::PROPERTY, PropertyType::STATION));
 	fields.push_back(new BuildableProperty("The Angel Islington", FieldType::PROPERTY, PropertyType::BUILDABLE_PROPERTY,100, Neighbourhood::LIGTHBLUE, 6));
 	fields.push_back(new CardField("Chance", FieldType::CARDFIELD));
@@ -49,7 +49,7 @@ Board::Board()
 	fields.push_back(new Station("Liverpool Street Stat.", FieldType::PROPERTY, PropertyType::STATION));
 	fields.push_back(new CardField("Chance", FieldType::CARDFIELD));
 	fields.push_back(new BuildableProperty("Park Lane", FieldType::PROPERTY, PropertyType::BUILDABLE_PROPERTY, 350, Neighbourhood::DARKBLUE, 35));
-	fields.push_back(new TaxField("SUPER TAX", FieldType::TAXFIELD, 100));
+	fields.push_back(new TaxField("SUPER TAX", FieldType::TAXFIELD, 100,"Pay 100!"));
 	fields.push_back(new BuildableProperty("Mayfair", FieldType::PROPERTY, PropertyType::BUILDABLE_PROPERTY, 400, Neighbourhood::DARKBLUE, 50));
 }
 

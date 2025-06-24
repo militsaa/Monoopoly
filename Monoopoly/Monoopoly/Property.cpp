@@ -23,6 +23,7 @@ void Property::buy(Player& player)
 	}
 	if (player.buyProp(price))
 	{
+		std::cout << "Buyed successfully!\n";
 		owner = &player;
 	}
 	else {
@@ -78,7 +79,7 @@ int Property::stepedOnProp() const
 {
 	if (!isBought())
 	{
-		std::cout << "You can buy this property if you want!";
+		std::cout << "You can buy this property if you want! (" << price << ")\n";
 		return 0;
 	}
 	return rent();

@@ -5,7 +5,10 @@
 class BankField : public Field {
 protected:
     int amount;
+    String description;
 public:
-    BankField(String name, FieldType type, int amount);
-    virtual void applyEffect(Player& player)=0;
+    BankField(String name, FieldType type, int amount, String description);
+    int getAmount() const;
+    String getDescription() const;
+    virtual int applyEffect(Player& player)=0;
 };

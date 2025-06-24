@@ -243,15 +243,17 @@ bool GameManager::askForConsent(const String& name)
 	return answer == 'y';
 }
 
-bool GameManager::rollTheDiesAndMove()
+bool GameManager::rollTheDiesAndMove(bool& rolled)
 {
-	int first = dieGenerator(6);
-	int second = dieGenerator(6);
-	if (handlePairOfDice(first, second))
+	/*int first = dieGenerator(6);
+	int second = dieGenerator(6);*/
+	int first = 1;
+	int second = 1;
+	if (handlePairOfDice(first, second, rolled))
 	{
 		return true;
 	}
-	std::cout << first << "  " << second;
+	std::cout << first << "  " << second<<'\n';
 	players[currPlayer]->changePosition((first + second));
 	return false;
 }
@@ -263,24 +265,31 @@ int GameManager::stepOnNewField()
 	if (field->getType() == FieldType::PROPERTY)
 	{
 		Property* prop = static_cast<Property*>(field);
+		std::cout << "You stept on " << prop->getName()<<" !\n";
 		return prop->stepedOnProp();
 	}
 	else if (field->getType() == FieldType::GOTOJAIL)
 	{
-		players[currPlayer]->setInJail(true);
+		players[currPlayer]->goToJail();
+		std::cout << field->getName()<< " !\n";
 		players[currPlayer]->setPosition(JAIL_IDX);
-		return 0;
 	}
 	else if(field->getType() == FieldType::TAXFIELD)
 	{
 		TaxField* taxField = static_cast<TaxField*>(field);
+		std::cout << taxField->getName() << " " << taxField->getDescription() << "\n";
 		taxField->applyEffect(*players[currPlayer]);
 	}
 	else if (field->getType() == FieldType::CARDFIELD)
 	{
 		CardField* cardField = static_cast<CardField*>(field);
-		//cardField.
+		cardField->drawAndApply(*players[currPlayer]);
+		if (players[currPlayer]->isBankrupt())
+		{
+			return -1;
+		}
 	}
+	return 0;
 }
 
 void GameManager::buyProperty()
@@ -350,16 +359,17 @@ void GameManager::quit()
 {
 	players[currPlayer]->bankrupt();
 	removeActivePlayer();
+	std::cout << players[currPlayer]->getUserName() << " quitted the game!\n";
 }
 
 void GameManager::setPlayers()
 {
-	std::cout << "How many players are going to play?";
+	std::cout << "How many players are going to play? (2-6): ";
 	int playersCnt = getNumAnswer();
 	activePlayers = playersCnt;
 	for (size_t i = 0; i < playersCnt; i++)
 	{
-		std::cout << "Player " << i << " username: ";
+		std::cout << "Player " << i+1 << " username: ";
 		String username;
 		std::cin >> username;
 		players.push_back(new Player(username));
@@ -504,28 +514,32 @@ void GameManager::buildCastle(const String& fieldName)
 	std::cout << "Castle built successfully on " << fieldName << "!\n";
 }
 
-bool GameManager::handlePairOfDice(int first, int second)
+bool GameManager::handlePairOfDice(int first, int second, bool& rolled)
 {
 	Player* curr = players[currPlayer];
 	if (first == second)
 	{
+		rolled = false;
 		if (curr->getInJail() && curr->getJailTurns() > 0)
 		{
-			curr->setInJail(false);
+			curr->getOutOfJail();
+			return false;
 		}
 		else
 		{
 			curr->addPairsOfDice();
+			if (curr->getPairsOfDice()==3)
+			{
+				curr->goToJail();
+				std::cout << "Third pair! Go to jail!\n";
+				return true;
+			}
 			return false;
-		}
-		if (curr->getPairsOfDice() == 3)
-		{
-			curr->setInJail(true);
-			return true;
 		}
 	}
 	else
 	{
+		rolled = true;
 		if (curr->getInJail())
 		{
 			curr->addJailTurn();
@@ -584,13 +598,13 @@ void GameManager::play()
 	setPlayers();
 	String command;
 	bool rolled = false;
+	bool rolledOnce = false;
 	bool justGotInPrison = false;
 	int dept = 0;
 	bool onTurn = true;
 
 	while (activePlayers>1)
 	{
-		CommandReactFactory::action(command, rolled, justGotInPrison, dept, onTurn); 
 		if (dept > 0)
 		{
 			if (players[currPlayer]->getBalance() >= dept)
@@ -605,12 +619,14 @@ void GameManager::play()
 		}
 		if (dept == 0 && !justGotInPrison)
 		{
+			std::cout << players[currPlayer]->getUserName() << "(b:" << players[currPlayer]->getBalance()<<") :";
 			std::cin >> command;
 			clearConsole();
 		}
 		else
 		{
 			rolled = false;
+			rolledOnce = false;
 			justGotInPrison = false;
 			dept = 0;
 			currPlayer == players.getSize() - 1 ? currPlayer = 0 : currPlayer++;
@@ -618,7 +634,10 @@ void GameManager::play()
 			{
 				currPlayer == players.getSize() - 1 ? currPlayer = 0 : currPlayer++;
 			}
+			std::cout << players[currPlayer]->getUserName() << "(b:" << players[currPlayer]->getBalance() << ") :";
+			std::cin >> command;
 		}
+		CommandReactFactory::action(command, rolled, rolledOnce, justGotInPrison, dept, onTurn);
 	}
 }
 
@@ -644,7 +663,7 @@ int strToInt(const String& str)
 	int res = 0;
 	for (size_t i = 0; i < str.getLenght(); i++)
 	{
-		int curr = str[i] + '0';
+		int curr = str[i] - '0';
 		res = res * 10 + curr;
 	}
 	return res;

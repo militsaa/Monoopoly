@@ -21,7 +21,7 @@ CardDeck::CardDeck()
 	cards.push_back(new PaymentCard(CardType::PAY, "Speeding fine £15.", -15));
 	cards.push_back(new PaymentCard(CardType::GROUP_PAVEMENT, "Grand Opera Opening. Collect $50 from each player", 50));
 	cards.push_back(new PaymentCard(CardType::GROUP_PAVEMENT, "You have been elected Chairman of the Board. Pay each player £50", -50));
-	shuffleCards(10);
+	shuffleCards(20);
 }
 
 CardDeck::~CardDeck()

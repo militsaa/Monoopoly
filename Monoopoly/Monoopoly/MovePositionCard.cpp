@@ -1,12 +1,14 @@
 #include "MovePositionCard.h"
 #include "Constants.h"
+#include "GameManager.h"
 
 MovePositionCard::MovePositionCard(CardType type, String description, int steps) : Card(type, description), steps(steps) {}
 
-void MovePositionCard::applyEffect(Player& player) const
+int MovePositionCard::applyEffect(Player& player) const
 {
+	GameManager& gm = GameManager::getInstance();
 	player.movePosition(steps);
-	int dept = gm.stepOnNewField(dept);
+	return gm.stepOnNewField();
 }
 
 MovePositionCard* MovePositionCard::clone() const

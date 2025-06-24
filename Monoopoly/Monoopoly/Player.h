@@ -16,7 +16,7 @@ public:
 	int getJailTurns() const;
 	void addJailTurn(); 
 	bool getInJail() const;
-	void setInJail(bool currently);	
+	//void setInJail(bool currently);	
 	int getPairsOfDice() const;
 	void setPairsOfDice(int val);
 	void addPairsOfDice();
@@ -26,6 +26,8 @@ public:
 	void giveMoney(int amount);
 	int getPosition() const;
 	void changePosition(int change);
+	void goToJail();
+	void getOutOfJail();
 	void setPosition(int index);
 	void movePosition(int steps);
 	String getUserName()const;

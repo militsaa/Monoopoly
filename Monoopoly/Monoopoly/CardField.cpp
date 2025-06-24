@@ -13,5 +13,6 @@ CardField* CardField::clone() const
 void CardField::drawAndApply(Player& player) const
 {
 	Card* currCard = deck.draw();
+	currCard->print();
 	currCard->applyEffect(player);
 }

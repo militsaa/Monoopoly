@@ -41,7 +41,7 @@ class GameManager {
 	void payDept(int dept);
 	void buildCottage(const String& fieldName);
 	void buildCastle(const String& fieldName);
-	bool handlePairOfDice(int first, int second);
+	bool handlePairOfDice(int first, int second, bool& rolled);
 	void setPlayers();
 	bool askForConsent(const String&);
 
@@ -57,8 +57,8 @@ public:
 	int getActivePlayerCnt() const;
 
 	void trade();
-	bool rollTheDiesAndMove();
-	int stepOnNewField(int dept);
+	bool rollTheDiesAndMove(bool& rolled);
+	int stepOnNewField();
 	void buyProperty();
 	void build();
 	void sell();

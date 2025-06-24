@@ -25,11 +25,6 @@ bool Player::getInJail() const
 	return inJail;
 }
 
-void Player::setInJail(bool currently)
-{
-	inJail = currently;
-}
-
 int Player::getPairsOfDice() const
 {
 	return pairsOfDice;
@@ -85,6 +80,18 @@ void Player::changePosition(int change)
 	{
 		possition -= FIELDS_COUNT;
 	}
+}
+
+void Player::goToJail()
+{
+	inJail = true;
+	jailTurns = 0;
+}
+
+void Player::getOutOfJail()
+{
+	inJail = false;
+	pairsOfDice = 0;
 }
 
 void Player::setPosition(int index)

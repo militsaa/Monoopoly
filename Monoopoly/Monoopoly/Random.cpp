@@ -3,14 +3,14 @@
 
 int randomNumberGenerator(int size)
 {
-	srand(time(NULL));
+	//srand(time(NULL));
 	int number = rand() % (size);
 	return number;
 }
 
 int dieGenerator(int size)
 {
-	srand(time(NULL));
+	//srand(time(NULL));
 	int number = rand() % (size) + 1;
 	return number;
 }

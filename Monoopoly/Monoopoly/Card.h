@@ -12,9 +12,10 @@ class Card {
 	String description;
 
 public:
-
 	Card(CardType type, String description);
 	~Card() = default;
-	virtual void applyEffect(Player& player) const = 0;
+	// /*String getDescription() const;*/
+	void print() const;
+	virtual int applyEffect(Player& player) const = 0;
 	virtual Card* clone()const = 0;
 };
