@@ -17,6 +17,7 @@ class GameManager {
 	int currPlayer;
 	int cottagesLeft = 32;
 	int castlesLeft = 12;
+	int activePlayers;
 
 	GameManager();
 
@@ -37,8 +38,10 @@ class GameManager {
 	void sellCottages(BuildableProperty* prop, int count);
 	void sellAllMorInNeighb(int fieldInd);
 	void playDept(int dept);
-
-
+	void buildCottage(const String& fieldName);
+	void buildCastle(const String& fieldName);
+	bool handlePairOfDice(int first, int second);
+	void payJail();
 	void setPlayers();
 	bool askForConsent(const String&);
 
@@ -47,16 +50,16 @@ public:
 	GameManager& operator=(const GameManager& other) = delete;
 	static GameManager& getInstance();
 	Vector<Player*> getPlayers() const;
+	Player* getCurrPlayer() const;
 	Vector<Field*> getFields() const;
-	//Player* getCurrPlayer() const;
-	void buildCottage(const String& fieldName);
-	void buildCastle(const String& fieldName);
+	void removeActivePlayer();
 
 	void trade();
-	void rollTheDiesAndMove();
+	bool rollTheDiesAndMove();
 	int stepOnNewField();
 	void buyProperty();
+	void build();
 	void sell();
+	void quit();
 	void play();
-	
 };

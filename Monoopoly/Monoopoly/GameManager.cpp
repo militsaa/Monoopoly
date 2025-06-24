@@ -217,7 +217,7 @@ void GameManager::playDept(int dept)
 {
 	int fieldInd = players[currPlayer]->getPosition();
 	Field* field = getFields()[fieldInd];
-	if (field->getType()!=FieldType::PROPERTY)
+	if (field->getType() != FieldType::PROPERTY)
 	{
 		players[currPlayer]->giveMoney(dept);
 		return;
@@ -235,12 +235,17 @@ bool GameManager::askForConsent(const String& name)
 	return answer == 'y';
 }
 
-void GameManager::rollTheDiesAndMove()
+bool GameManager::rollTheDiesAndMove()
 {
 	int first = dieGenerator(6);
 	int second = dieGenerator(6);
+	if (handlePairOfDice(first, second))
+	{
+		return true;
+	}
 	std::cout << first << "  " << second;
 	players[currPlayer]->changePosition((first + second));
+	return false;
 }
 
 int GameManager::stepOnNewField()
@@ -265,6 +270,20 @@ void GameManager::buyProperty()
 	}
 	Property* prop = static_cast<Property*>(getFields()[currPoss]);
 	prop->buy(*players[currPlayer]);
+}
+
+void GameManager::build()
+{
+	String property;
+	String type;
+	if (type == "castle")
+	{
+		buildCottage(property);
+	}
+	else if (type == "castle")
+	{
+		buildCastle(property);
+	}
 }
 
 void GameManager::sell()
@@ -304,10 +323,17 @@ void GameManager::sell()
 	return;
 }
 
+void GameManager::quit()
+{
+	players[currPlayer]->bankrupt();
+	removeActivePlayer();
+}
+
 void GameManager::setPlayers()
 {
 	std::cout << "How many players are going to play?";
 	int playersCnt = getNumAnswer();
+	activePlayers = playersCnt;
 	for (size_t i = 0; i < playersCnt; i++)
 	{
 		std::cout << "Player " << i << " username: ";
@@ -398,14 +424,19 @@ Vector<Player*> GameManager::getPlayers() const
 	return players;
 }
 
+Player* GameManager::getCurrPlayer() const
+{
+	return players[currPlayer];
+}
+
 Vector<Field*> GameManager::getFields() const
 {
 	return board.getFields();
 }
 
-Player* GameManager::getCurrPlayer() const
+void GameManager::removeActivePlayer()
 {
-	return players[currPlayer];
+	activePlayers--;
 }
 
 void GameManager::buildCottage(const String& fieldName)
@@ -450,6 +481,46 @@ void GameManager::buildCastle(const String& fieldName)
 	std::cout << "Castle built successfully on " << fieldName << "!\n";
 }
 
+bool GameManager::handlePairOfDice(int first, int second)
+{
+	Player* curr = players[currPlayer];
+	if (first == second)
+	{
+		if (curr->getInJail() && curr->getJailTurns() > 0)
+		{
+			curr->setInJail(false);
+		}
+		else
+		{
+			curr->addPairsOfDice();
+			return false;
+		}
+		if (curr->getPairsOfDice() == 3)
+		{
+			curr->setInJail(true);
+			return true;
+		}
+	}
+	else
+	{
+		if (curr->getInJail())
+		{
+			curr->addJailTurn();
+			return true;
+		}
+		else
+		{
+			curr->setPairsOfDice(0);
+			return false;
+		}
+	}
+}
+
+void GameManager::payJail()
+{
+	players[currPlayer]->payForJail();
+}
+
 void GameManager::trade()
 {
 	String reseiver;
@@ -479,13 +550,13 @@ void GameManager::play()
 {
 	setPlayers();
 	String command;
-	bool rolled;
-	int dept;
+	bool rolled = false;
+	bool justGotInPrison = false;
+	int dept = 0;
 
-	while (true)
+	while (activePlayers>1)
 	{
-		CommandReactFactory::action(command, rolled, dept);
-		//check if all are bankrupt 
+		CommandReactFactory::action(command, rolled, justGotInPrison, dept); 
 		if (dept > 0)
 		{
 			if (players[currPlayer]->getBalance() >= dept)
@@ -493,7 +564,7 @@ void GameManager::play()
 				playDept(dept);
 			}
 		}
-		if (dept == 0)
+		if (dept == 0 && !justGotInPrison)
 		{
 			std::cin >> command;
 			clearConsole();
@@ -501,8 +572,13 @@ void GameManager::play()
 		else
 		{
 			rolled = false;
+			justGotInPrison = false;
 			dept = 0;
 			currPlayer == players.getSize() - 1 ? currPlayer = 0 : currPlayer++;
+			while (players[currPlayer]->isBankrupt())
+			{
+				currPlayer == players.getSize() - 1 ? currPlayer = 0 : currPlayer++;
+			}
 		}
 	}
 }

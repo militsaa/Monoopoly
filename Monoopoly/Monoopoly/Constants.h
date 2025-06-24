@@ -16,3 +16,4 @@ const int STATIONS_INDEXES[STATION_COUNT] = { 5,15,25,35 };
 const int CASTLE_AS_COTT_CNT = 5;
 const int BEG_BALANCE = 1500;
 const double FOUR_COTTAGES_FACTOR = 1.749006;
+const int JAIL_TAX = 100;

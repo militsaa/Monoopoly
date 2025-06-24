@@ -10,6 +10,41 @@ int Player::getBalance() const
     return balance;
 }
 
+int Player::getJailTurns() const
+{
+	return jailTurns;
+}
+
+void Player::addJailTurn()
+{
+	jailTurns++;
+}
+
+bool Player::getInJail() const
+{
+	return inJail;
+}
+
+void Player::setInJail(bool currently)
+{
+	inJail = currently;
+}
+
+int Player::getPairsOfDice() const
+{
+	return pairsOfDice;
+}
+
+void Player::setPairsOfDice(int val)
+{
+	pairsOfDice = val;
+}
+
+void Player::addPairsOfDice()
+{
+	pairsOfDice++;
+}
+
 bool Player::buyProp(int tax)
 {
 	if (balance<tax)
@@ -35,7 +70,6 @@ void Player::addMoney(int tax)
 
 void Player::giveMoney(int amount)
 {
-	//TODO: do i have enough logic !!!!
 	balance -= amount;
 }
 
@@ -44,7 +78,7 @@ int Player::getPosition() const
 	return possition;
 }
 
-int Player::changePosition(int change)
+void Player::changePosition(int change)
 {
 	possition += change;
 	if (possition>=FIELDS_COUNT)
@@ -81,6 +115,14 @@ void Player::movePosition(int steps)
 String Player::getUserName() const
 {
 	return userName;
+}
+
+void Player::payForJail()
+{
+	if (balance>=JAIL_TAX)
+	{
+		giveMoney(JAIL_TAX);
+	}
 }
 
 bool Player::isBankrupt() const

@@ -1,25 +1,29 @@
 #include "CommandReactFactory.h"
 #include "GameManager.h"
 
-void CommandReactFactory::action(const String& command, bool& rolled, int& dept)
+void CommandReactFactory::action(const String& command, bool& rolled, bool& justGotInPrison, int& dept)
 {
 	GameManager& gm = GameManager::getInstance();
 	if (command == "ROLL")
-	{	//check for prizon
+	{
 		if (dept || rolled)
 		{
 			std::cout << "You cannot roll!\n";
 			return;
 		}
-		gm.rollTheDiesAndMove();
+		if (gm.rollTheDiesAndMove())
+		{
+			justGotInPrison = true;
+			return;
+		}
 		rolled = true;
 		dept = gm.stepOnNewField();
 	}
 	else if (command == "END")
 	{
-		if (dept > 0)
+		if (dept > 0 || !rolled)
 		{
-			std::cout << "You cannot finish your turn before paying your dept!\n";
+			std::cout << "You cannot finish your turn!\n";
 			return;
 		}
 		dept = -1;
@@ -35,7 +39,7 @@ void CommandReactFactory::action(const String& command, bool& rolled, int& dept)
 	}
 	else if (command == "BUILD")
 	{
-
+		gm.build();
 	}
 	else if (command == "SELL")
 	{
@@ -47,11 +51,7 @@ void CommandReactFactory::action(const String& command, bool& rolled, int& dept)
 	}
 	else if (command == "PAYJAIL")
 	{
-
-	}
-	else if (command == "ASSETS")
-	{
-
+		
 	}
 	else if (command == "SAVE")
 	{
@@ -59,6 +59,7 @@ void CommandReactFactory::action(const String& command, bool& rolled, int& dept)
 	}
 	else if (command == "QUIT")
 	{
-
+		gm.quit();
+		dept = -1;
 	}
 }

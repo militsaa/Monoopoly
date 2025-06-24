@@ -16,7 +16,7 @@ bool Property::isBought() const
 
 void Property::buy(Player& player)
 {
-	if (isBought)
+	if (isBought())
 	{
 		std::cout << "Already bought!\n";
 		return;
