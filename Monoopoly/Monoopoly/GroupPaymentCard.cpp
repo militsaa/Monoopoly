@@ -58,7 +58,7 @@ void GroupPaymentCard::payOthers(GameManager& gm, Player& player, int sum) const
 
 int GroupPaymentCard::giveMoneyToOthers(GameManager& gm, Player& player) const
 {
-	int sum = (-amount) * gm.getActivePlayerCnt();
+	int sum = (-amount) * (gm.getActivePlayerCnt()-1);
 
 	if (player.getBalance() >= sum)
 	{

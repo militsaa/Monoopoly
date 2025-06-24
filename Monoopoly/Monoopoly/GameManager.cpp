@@ -135,49 +135,63 @@ bool GameManager::canSellCottage(Vector<BuildableProperty*> neighb)
 	return true;
 }
 
-void GameManager::handleTradeMoneyForProp(const String& want, const String& give, int reseiverInd) // 2 ednakvi funcs!!!
+void GameManager::handleTradeMoneyForProp(int sum, int fieldInd, int reseiverInd) // 2 ednakvi funcs!!!
 {
-	int idx = getFieldIndByName(give);
-	if (idx < 0)
+	if (fieldInd < 0 || fieldInd >= getFields().getSize())
 	{
-		std::cout << "Incorrect data!";
+		std::cout << "Incorrect data!\n";
 		return;
 	}
-	BuildableProperty* prop = static_cast<BuildableProperty*>(board.getFields()[idx]);
+	Field* field = static_cast<Field*>(board.getFields()[fieldInd]);
+	if (field->getType() != FieldType::PROPERTY)
+	{
+		std::cout << "You can trade only propertirs!\n";
+		return;
+	}
+	BuildableProperty* prop = static_cast<BuildableProperty*>(board.getFields()[fieldInd]);
 	if (prop->getOwner() != players[currPlayer])
 	{
 		std::cout << "You can trade only your properties!\n";
 		return;
 	}
+	if (players[reseiverInd]->getBalance() < sum)
+	{
+		std::cout << "You don't have enough money to trade!\n";
+		return;
+	}
 	if (askForConsent(players[reseiverInd]->getUserName()))
 	{
-		sellAllMorInNeighb(idx);
-		prop->setOwner(players[reseiverInd]);
-		int sum = strToInt(want);
-		players[currPlayer]->addMoney(sum);
+		sellAllMorInNeighb(fieldInd);
+		prop->setOwner(players[currPlayer]);
+		players[currPlayer]->giveMoney(sum);
+		players[reseiverInd]->addMoney(sum);
 	}
 }
 
-void GameManager::handleTradePropForMoney(const String& want, const String& give, int reseiverInd)
+void GameManager::handleTradePropForMoney(int fieldInd, int sum, int reseiverInd)
 {
-	int idx = getFieldIndByName(want);
-	if (idx < 0)
+	if (fieldInd < 0)
 	{
 		std::cout << "Incorrect data!";
 		return;
 	}
-	BuildableProperty* prop = static_cast<BuildableProperty*>(board.getFields()[idx]);
+	BuildableProperty* prop = static_cast<BuildableProperty*>(board.getFields()[fieldInd]);
 	if (prop->getOwner() != players[reseiverInd])
 	{
 		std::cout << "Incorrect data!";
 		return;
 	}
+	if (players[reseiverInd]->getBalance() < sum)
+	{
+		std::cout << players[reseiverInd]->getUserName() << " doesn't have enough money to trade!\n";
+		return;
+	}
 	if (askForConsent(players[reseiverInd]->getUserName()))
 	{
-		sellAllMorInNeighb(idx);
-		prop->setOwner(players[currPlayer]);
-		int sum = strToInt(give);
-		players[reseiverInd]->addMoney(sum);
+		sellAllMorInNeighb(fieldInd);
+		prop->setOwner(players[reseiverInd]);
+		players[reseiverInd]->giveMoney(sum);
+		players[currPlayer]->addMoney(sum);
 	}
 }
 
@@ -245,15 +259,13 @@ bool GameManager::askForConsent(const String& name)
 
 bool GameManager::rollTheDiesAndMove(bool& rolled)
 {
-	/*int first = dieGenerator(6);
-	int second = dieGenerator(6);*/
-	int first = 1;
-	int second = 1;
+	int first = dieGenerator(6);
+	int second = dieGenerator(6);
 	if (handlePairOfDice(first, second, rolled))
 	{
 		return true;
 	}
-	std::cout << first << "  " << second<<'\n';
+	std::cout << first << "  " << second << '\n';
 	players[currPlayer]->changePosition((first + second));
 	return false;
 }
@@ -265,16 +277,16 @@ int GameManager::stepOnNewField()
 	if (field->getType() == FieldType::PROPERTY)
 	{
 		Property* prop = static_cast<Property*>(field);
-		std::cout << "You stept on " << prop->getName()<<" !\n";
+		std::cout << "You stept on " << prop->getName() << " !\n";
 		return prop->stepedOnProp();
 	}
 	else if (field->getType() == FieldType::GOTOJAIL)
 	{
 		players[currPlayer]->goToJail();
-		std::cout << field->getName()<< " !\n";
+		std::cout << field->getName() << " !\n";
 		players[currPlayer]->setPosition(JAIL_IDX);
 	}
-	else if(field->getType() == FieldType::TAXFIELD)
+	else if (field->getType() == FieldType::TAXFIELD)
 	{
 		TaxField* taxField = static_cast<TaxField*>(field);
 		std::cout << taxField->getName() << " " << taxField->getDescription() << "\n";
@@ -288,6 +300,10 @@ int GameManager::stepOnNewField()
 		{
 			return -1;
 		}
+	}
+	else
+	{
+		std::cout << "Steped on " << field->getName() << '\n';
 	}
 	return 0;
 }
@@ -306,15 +322,20 @@ void GameManager::buyProperty()
 
 void GameManager::build()
 {
-	String property;
+	int idx;
 	String type;
+	std::cin >> idx >> type;
 	if (type == "castle")
 	{
-		buildCottage(property);
+		buildCottage(idx);
 	}
 	else if (type == "castle")
 	{
-		buildCastle(property);
+		buildCastle(idx);
+	}
+	else
+	{
+		std::cout << "Incorrect data!\n";
 	}
 }
 
@@ -369,7 +390,7 @@ void GameManager::setPlayers()
 	activePlayers = playersCnt;
 	for (size_t i = 0; i < playersCnt; i++)
 	{
-		std::cout << "Player " << i+1 << " username: ";
+		std::cout << "Player " << i + 1 << " username: ";
 		String username;
 		std::cin >> username;
 		players.push_back(new Player(username));
@@ -472,46 +493,44 @@ void GameManager::removeActivePlayer()
 	activePlayers--;
 }
 
-void GameManager::buildCottage(const String& fieldName)
+void GameManager::buildCottage(int fieldIdx)
 {
-	int fieldInd = getFieldIndByName(fieldName);
-	if (fieldInd < 0)
+	if (fieldIdx < 0)
 	{
 		std::cout << "There is no such field!\n";
 		return;
 	}
-	if (!canBuildCottage(fieldInd))
+	if (!canBuildCottage(fieldIdx))
 	{
 		std::cout << "You cannot build a cottage!\n";
 		return;
 	}
-	BuildableProperty* prop = static_cast<BuildableProperty*>(board.getFields()[fieldInd]);
+	BuildableProperty* prop = static_cast<BuildableProperty*>(board.getFields()[fieldIdx]);
 	prop->addCottage();
 	cottagesLeft--;
 	players[currPlayer]->giveMoney(prop->getCottagePrice());
-	std::cout << "Cottage is build successfully on " << fieldName << "!\n";
+	std::cout << "Cottage is build successfully on " << getFields()[fieldIdx]->getName() << "!\n";
 }
 
-void GameManager::buildCastle(const String& fieldName)
+void GameManager::buildCastle(int fieldIdx)
 {
-	const int fieldInd = getFieldIndByName(fieldName);
-	if (fieldInd < 0) {
+	if (fieldIdx < 0) {
 		std::cout << "There is no such field!\n";
 		return;
 	}
-	if (!canBuildCastle(fieldInd)) {
-		std::cout << "You cannot build a castle on " << fieldName << "!\n";
+	if (!canBuildCastle(fieldIdx)) {
+		std::cout << "You cannot build a castle on " << getFields()[fieldIdx]->getName() << "!\n";
 		return;
 	}
 
-	BuildableProperty* prop = static_cast<BuildableProperty*>(board.getFields()[fieldInd]);
+	BuildableProperty* prop = static_cast<BuildableProperty*>(board.getFields()[fieldIdx]);
 	prop->addCastle();
 	players[currPlayer]->giveMoney(prop->getCottagePrice());
 
 	cottagesLeft += 4;
 	--castlesLeft;
 
-	std::cout << "Castle built successfully on " << fieldName << "!\n";
+	std::cout << "Castle built successfully on " << getFields()[fieldIdx]->getName() << "!\n";
 }
 
 bool GameManager::handlePairOfDice(int first, int second, bool& rolled)
@@ -528,7 +547,7 @@ bool GameManager::handlePairOfDice(int first, int second, bool& rolled)
 		else
 		{
 			curr->addPairsOfDice();
-			if (curr->getPairsOfDice()==3)
+			if (curr->getPairsOfDice() == 3)
 			{
 				curr->goToJail();
 				std::cout << "Third pair! Go to jail!\n";
@@ -568,29 +587,34 @@ int GameManager::getActivePlayerCnt() const
 	return activePlayers;
 }
 
-void GameManager::trade()
+void GameManager::tradeForProp()
 {
+	int money = 0;
+	int fieldInd = 0;
 	String reseiver;
-	String want;
-	String give;
-	std::cout << reseiver << want << give;
+	std::cout << money << fieldInd << reseiver;
 	int reseiverInd = getPlayerIndByName(reseiver);
 	if (reseiverInd < 0)
 	{
 		std::cout << "";
 		return;
 	}
-	if (isNumber(want))
+	handleTradeMoneyForProp(money, fieldInd, reseiverInd);
+}
+
+void GameManager::tradeForMoney()
+{
+	int fieldInd = 0;
+	int money = 0;
+	String reseiver;
+	std::cout << money << fieldInd << reseiver;
+	int reseiverInd = getPlayerIndByName(reseiver);
+	if (reseiverInd < 0)
 	{
-		handleTradeMoneyForProp(want, give, reseiverInd);
+		std::cout << "";
+		return;
 	}
-	else if (isNumber(give))
-	{
-		handleTradePropForMoney(want, give, reseiverInd);
-	}
-	else {
-		std::cout << "Incorrect data!\n";
-	}
+	handleTradePropForMoney(money, fieldInd, reseiverInd);
 }
 
 void GameManager::play()
@@ -603,7 +627,7 @@ void GameManager::play()
 	int dept = 0;
 	bool onTurn = true;
 
-	while (activePlayers>1)
+	while (activePlayers > 1)
 	{
 		if (dept > 0)
 		{
@@ -611,17 +635,16 @@ void GameManager::play()
 			{
 				if (!onTurn)
 				{
-				payDeptFromCard(dept);
-				return;
+					payDeptFromCard(dept);
+					return;
 				}
 				payDept(dept);
 			}
 		}
 		if (dept == 0 && !justGotInPrison)
 		{
-			std::cout << players[currPlayer]->getUserName() << "(b:" << players[currPlayer]->getBalance()<<") :";
+			std::cout << players[currPlayer]->getUserName() << "(b:" << players[currPlayer]->getBalance() << ") :";
 			std::cin >> command;
-			clearConsole();
 		}
 		else
 		{
@@ -638,6 +661,7 @@ void GameManager::play()
 			std::cin >> command;
 		}
 		CommandReactFactory::action(command, rolled, rolledOnce, justGotInPrison, dept, onTurn);
+		clearConsole();
 	}
 }
 

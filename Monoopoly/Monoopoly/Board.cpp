@@ -19,7 +19,7 @@ Board::Board()
 	fields.push_back(new BuildableProperty("Euston Road", FieldType::PROPERTY, PropertyType::BUILDABLE_PROPERTY, 100, Neighbourhood::LIGTHBLUE, 6));
 	fields.push_back(new BuildableProperty("Pentonville Road", FieldType::PROPERTY, PropertyType::BUILDABLE_PROPERTY, 120, Neighbourhood::LIGTHBLUE, 8));
 
-	fields.push_back(new DeadField("In Jail \n Vising", FieldType::JAIL));
+	fields.push_back(new DeadField("Jail", FieldType::JAIL));//JAIL
 	fields.push_back(new BuildableProperty("Pall Mall", FieldType::PROPERTY, PropertyType::BUILDABLE_PROPERTY, 140, Neighbourhood::PINK, 10));
 	fields.push_back(new Property("Electric Company", FieldType::PROPERTY, PropertyType::UTILITY, 150));
 	fields.push_back(new BuildableProperty("Whitehall", FieldType::PROPERTY, PropertyType::BUILDABLE_PROPERTY, 140, Neighbourhood::PINK, 10));

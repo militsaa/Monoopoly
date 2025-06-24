@@ -19,8 +19,8 @@ CardDeck::CardDeck()
 	cards.push_back(new MovePositionCard(CardType::MOVE, "Advance 5 Spaces.", 5));
 	cards.push_back(new PaymentCard(CardType::PAY, "You have won a crossword competition. Collect £100!", 100));
 	cards.push_back(new PaymentCard(CardType::PAY, "Speeding fine £15.", -15));
-	cards.push_back(new PaymentCard(CardType::GROUP_PAVEMENT, "Grand Opera Opening. Collect $50 from each player", 50));
-	cards.push_back(new PaymentCard(CardType::GROUP_PAVEMENT, "You have been elected Chairman of the Board. Pay each player £50", -50));
+	cards.push_back(new GroupPaymentCard(CardType::GROUP_PAVEMENT, "Grand Opera Opening. Collect $50 from each player", 50));
+	cards.push_back(new GroupPaymentCard(CardType::GROUP_PAVEMENT, "You have been elected Chairman of the Board. Pay each player £50", -50));
 	shuffleCards(20);
 }
 

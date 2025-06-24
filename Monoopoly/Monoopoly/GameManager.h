@@ -32,15 +32,15 @@ class GameManager {
 	bool canSell()const;
 	bool canSellCastle(Vector<BuildableProperty*> neighb) const;
 	bool canSellCottage(Vector<BuildableProperty*> neighb);
-	void handleTradeMoneyForProp(const String& want, const String& give, int reseiverInd);
-	void handleTradePropForMoney(const String& want, const String& give, int reseiverInd);
+	void handleTradeMoneyForProp(int sum, int fieldInd, int reseiverInd);
+	void handleTradePropForMoney(int fieldInd, int sum, int reseiverInd);
 	void sellCastle(BuildableProperty* prop);
 	void sellCottages(BuildableProperty* prop, int count);
 	void sellAllMorInNeighb(int fieldInd);
 	void payDeptFromCard(int dept);
 	void payDept(int dept);
-	void buildCottage(const String& fieldName);
-	void buildCastle(const String& fieldName);
+	void buildCottage(int fieldIdx);
+	void buildCastle(int fieldIdx);
 	bool handlePairOfDice(int first, int second, bool& rolled);
 	void setPlayers();
 	bool askForConsent(const String&);
@@ -56,7 +56,8 @@ public:
 	bool payJail();
 	int getActivePlayerCnt() const;
 
-	void trade();
+	void tradeForProp();
+	void tradeForMoney();
 	bool rollTheDiesAndMove(bool& rolled);
 	int stepOnNewField();
 	void buyProperty();

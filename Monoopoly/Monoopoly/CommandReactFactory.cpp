@@ -58,9 +58,13 @@ void CommandReactFactory::action(const String& command, bool& rolled, bool& roll
 	{
 		gm.sell();
 	}
-	else if (command == "TRADE")
+	else if (command == "TRADE_FOR_MONEY")
 	{
-		gm.trade();
+		gm.tradeForMoney();
+	}
+	else if (command == "TRADE_FOR_PROPERTY")
+	{
+		gm.tradeForProp();
 	}
 	else if (command == "PAYJAIL")
 	{
@@ -78,5 +82,9 @@ void CommandReactFactory::action(const String& command, bool& rolled, bool& roll
 	{
 		gm.quit();
 		dept = -1;
+	}
+	else
+	{
+		std::cout << "Unknown command!\n";
 	}
 }
