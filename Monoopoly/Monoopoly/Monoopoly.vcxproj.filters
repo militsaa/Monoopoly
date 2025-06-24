@@ -78,7 +78,10 @@
     <ClCompile Include="CommandReactFactory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Visualize.cpp">
+    <ClCompile Include="cellStr.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BoardPrinter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -149,7 +152,10 @@
     <ClInclude Include="CommandReactFactory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Visualize.h">
+    <ClInclude Include="BoardPrinter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CellStr.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

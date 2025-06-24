@@ -44,6 +44,7 @@ class GameManager {
 	bool handlePairOfDice(int first, int second, bool& rolled);
 	void setPlayers();
 	bool askForConsent(const String&);
+	void endTheGame()const;
 
 public:
 	GameManager(const GameManager& other) = delete;

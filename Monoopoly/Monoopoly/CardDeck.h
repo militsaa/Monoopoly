@@ -8,6 +8,7 @@
 class CardDeck {
 protected:
 	Vector<Card*>cards{CARDS_CNT};
+	// int deckSize = 2;
 	int deckSize = CARDS_CNT;
 	void shuffleCards(int times);
 public:

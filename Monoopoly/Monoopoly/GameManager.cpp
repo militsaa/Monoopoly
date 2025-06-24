@@ -266,12 +266,25 @@ bool GameManager::askForConsent(const String& name)
 	return answer == 'y';
 }
 
+void GameManager::endTheGame() const
+{
+	Player* left = players[0];
+	for (size_t i = 1; i < players.getSize(); i++)
+	{
+		if (!players[i]->isBankrupt())
+		{
+			left = players[i];
+		}
+	}
+	std::cout << "Congratilation " << left->getUserName() << " you won the game!";
+}
+
 bool GameManager::rollTheDiesAndMove(bool& rolled)
 {
 	/*int first = dieGenerator(6);
 	int second = dieGenerator(6);*/
-	int first = 2;
-	int second = 4;
+	int first = 1;
+	int second = 1;
 	if (handlePairOfDice(first, second, rolled))
 	{
 		return true;
@@ -698,6 +711,7 @@ void GameManager::play()
 		CommandReactFactory::action(command, rolled, rolledOnce, justGotInPrison, dept, onTurn);
 		clearConsole();
 	}
+	void endTheGame();
 }
 
 bool isNumber(const String& str)

@@ -129,9 +129,11 @@
   <ItemGroup>
     <ClCompile Include="BankField.cpp" />
     <ClCompile Include="Board.cpp" />
+    <ClCompile Include="BoardPrinter.cpp" />
     <ClCompile Include="Card.cpp" />
     <ClCompile Include="CardDeck.cpp" />
     <ClCompile Include="CardField.cpp" />
+    <ClCompile Include="cellStr.cpp" />
     <ClCompile Include="DeadField.cpp" />
     <ClCompile Include="CommandReactFactory.cpp" />
     <ClCompile Include="Field.cpp" />
@@ -148,7 +150,6 @@
     <ClCompile Include="SmallStringOpt.cpp" />
     <ClCompile Include="Station.cpp" />
     <ClCompile Include="TaxField.cpp" />
-    <ClCompile Include="Visualize.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BankField.h" />
@@ -156,6 +157,7 @@
     <ClInclude Include="Card.h" />
     <ClInclude Include="CardDeck.h" />
     <ClInclude Include="CardField.h" />
+    <ClInclude Include="CellStr.h" />
     <ClInclude Include="Constants.h" />
     <ClInclude Include="CommandReactFactory.h" />
     <ClInclude Include="Field.h" />
@@ -173,7 +175,7 @@
     <ClInclude Include="TaxField.h" />
     <ClInclude Include="Property.h" />
     <ClInclude Include="Vector.h" />
-    <ClInclude Include="Visualize.h" />
+    <ClInclude Include="BoardPrinter.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -6,12 +6,7 @@ void CommandReactFactory::action(const String& command, bool& rolled, bool& roll
 	GameManager& gm = GameManager::getInstance();
 	if (command == "ROLL")
 	{
-		if (!onTurn)
-		{
-			std::cout << "Its not your turn!\n";
-			return;
-		}
-		if (dept || rolled)
+		if (!onTurn ||dept || rolled)
 		{
 			std::cout << "You cannot roll!\n";
 			return;
@@ -35,11 +30,7 @@ void CommandReactFactory::action(const String& command, bool& rolled, bool& roll
 	}
 	else if (command == "BUY")
 	{
-		if (!onTurn)
-		{
-			return;
-		}
-		if (!rolledOnce || dept > 0)
+		if (!onTurn || !rolledOnce || dept > 0)
 		{
 			std::cout << "You cannot buy a property right now!\n";
 			return;
@@ -48,8 +39,9 @@ void CommandReactFactory::action(const String& command, bool& rolled, bool& roll
 	}
 	else if (command == "BUILD")
 	{
-		if (!onTurn)
+		if (!onTurn || dept>0)
 		{
+			std::cout<<"You cannot build!\n";
 			return;
 		}
 		gm.build();
