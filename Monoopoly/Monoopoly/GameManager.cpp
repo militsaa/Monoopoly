@@ -5,11 +5,8 @@
 #include "CommandReactFactory.h"
 #include "TaxField.h"
 #include "CardField.h"
-
-GameManager::GameManager()
-{
-	//TODO?
-}\
+#include "BoardPrinter.h"
+#include <fstream>
 
 void GameManager::collectNeighbour(Vector<BuildableProperty*>& same, int baseInd) const
 {
@@ -65,7 +62,7 @@ bool GameManager::ownsWholeSet(const Vector<BuildableProperty*>& sameNb) const
 {
 	for (size_t i = 1; i < sameNb.getSize(); ++i) {
 		if (!sameNb[i]->isOwnedBy(players[currPlayer])) {
-		std::cout << sameNb[i]->getOwner()->getUserName();
+			std::cout << sameNb[i]->getOwner()->getUserName();
 			return false;
 		}
 	}
@@ -136,7 +133,7 @@ bool GameManager::canSellCottage(Vector<BuildableProperty*> neighb)
 	return true;
 }
 
-void GameManager::handleTradeMoneyForProp(int sum, int fieldInd, int reseiverInd) // 2 ednakvi funcs!!!
+void GameManager::handleTradeMoneyForProp(int sum, int fieldInd, int reseiverInd)
 {
 	if (fieldInd < 0 || fieldInd >= getFields().getSize())
 	{
@@ -216,10 +213,6 @@ void GameManager::sellAllMorInNeighb(int fieldInd)
 {
 	Vector<BuildableProperty*> neighb;
 	collectNeighbour(neighb, fieldInd);
-	// to delete
-	std::cout << neighb[0]->getHasCastle() << " " << neighb[0]->getCottageCount() << "\n";
-	std::cout << neighb[1]->getHasCastle() << " " << neighb[1]->getCottageCount() << "\n";
-	//
 
 	for (size_t i = 0; i < neighb.getSize(); i++)
 	{
@@ -233,9 +226,6 @@ void GameManager::sellAllMorInNeighb(int fieldInd)
 			sellCottages(neighb[i], cnt);
 		}
 	}
-	// to delete
-	std::cout << neighb[0]->getHasCastle() << " " << neighb[0]->getCottageCount() << "\n";
-	std::cout << neighb[1]->getHasCastle() << " " << neighb[1]->getCottageCount() << "\n";
 }
 
 void GameManager::payDeptFromCard(int dept)
@@ -279,12 +269,144 @@ void GameManager::endTheGame() const
 	std::cout << "Congratilation " << left->getUserName() << " you won the game!";
 }
 
+void GameManager::savePlayers()
+{
+	std::ofstream os("players.txt", std::ios::binary | std::ios::trunc);
+	if (!os.is_open())
+	{
+		std::cout << "failed" << '/n';
+		return;
+	}
+	for (size_t i = 0; i < players.getSize(); i++) {
+		if (players[i]->isBankrupt())
+		{
+			continue;
+		}
+		String userName = players[i]->getUserName();
+		size_t len = userName.getSize();
+		os.write((const char*)&len, sizeof(size_t));
+		os.write(userName.c_str(), len);
+		int poss = players[i]->getPosition();
+		os.write((const char*)&poss, sizeof(int));
+		int balance = players[i]->getBalance();
+		os.write((const char*)&balance, sizeof(int));
+		bool inJail = players[i]->getInJail();
+		os.write((const char*)&balance, sizeof(bool));
+		int jailTurns = players[i]->getJailTurns();
+		os.write((const char*)&jailTurns, sizeof(int));
+		int pairs = players[i]->getPairsOfDice();
+		os.write((const char*)&pairs, sizeof(int));
+	}
+	os.close();
+}
+
+void GameManager::saveFields()
+{
+	std::ofstream os("fields.txt", std::ios::binary | std::ios::trunc);
+	if (!os.is_open())
+	{
+		std::cout << "failed" << '/n';
+		return;
+	}
+	Field* field;
+	for (int i = 0; i < getFields().getSize(); i++)
+	{
+		field = getFields()[i];
+		int index;
+		if (field->getType() == FieldType::PROPERTY)
+		{
+			Property* prop = static_cast<Property*>(field);
+			if (prop->isBought())
+			{
+				Player* owner = prop->getOwner();
+				index = getIndexOfPlayer(owner);
+				if (index >= 0)
+				{
+					os.write((const char*)&i, sizeof(int));
+					os.write((const char*)&index, sizeof(int));
+				}
+			}
+		}
+	}
+	os.close();
+}
+
+bool GameManager::loadPlayers()
+{
+	std::ifstream is("players.txt", std::ios::binary);
+	if (!is.is_open()) {
+		return false;
+	}
+	int userNameLen =0;
+	String userName;
+	int poss=0;
+	int balance=0;
+	bool inJail=false;
+	int jailTurns = 0;
+	int pairs=0;
+	while (is.peek() != EOF) {
+		is.read((char*)&userNameLen, sizeof(int));
+		readStringFromFile(is, userName);
+		is.read((char*)&poss, sizeof(int));
+		is.read((char*)&balance, sizeof(int));
+		is.read((char*)&inJail, sizeof(bool));
+		is.read((char*)&jailTurns, sizeof(int));
+		is.read((char*)&pairs, sizeof(int));
+		players.push_back(new Player(userName, poss, balance, inJail, jailTurns, pairs));
+	}
+	return true;
+}
+
+bool GameManager::loadFields()
+{
+	std::ifstream is("fields.txt", std::ios::binary);
+	if (!is.is_open()) {
+		return false;
+	}
+	int fieldIndex;
+	int playerIndex;
+	Property* prop;
+	while (is.peek() != EOF) {
+		is.read((char*)&fieldIndex, sizeof(int));
+		is.read((char*)&playerIndex, sizeof(int));
+		prop = static_cast <Property*>(getFields()[fieldIndex]);
+		prop->setOwner(players[playerIndex]);
+	}
+	return true;
+}
+
+void GameManager::readStringFromFile(std::istream& is, String& curr)
+{
+	size_t len;
+	is.read((char*)&len, sizeof(size_t));
+	char* buff = new char[len + 1];
+	is.read(buff, len);
+	buff[len] = '\0';
+	curr = buff;
+	delete[] buff;
+}
+
+int GameManager::getIndexOfPlayer(Player* p)
+{
+	for (size_t i = 0; i < players.getSize(); i++)
+	{
+		if (players[i] == p)
+		{
+			return i;
+		}
+	}
+	return -1;
+}
+
+//void GameManager::presentBoard(const Vector<Field*>& fields, int width) const
+//{
+//	printBoard(fields, width);
+//}
+
 bool GameManager::rollTheDiesAndMove(bool& rolled)
 {
-	/*int first = dieGenerator(6);
-	int second = dieGenerator(6);*/
-	int first = 1;
-	int second = 1;
+	int first = dieGenerator(6);
+	int second = dieGenerator(6);
 	if (handlePairOfDice(first, second, rolled))
 	{
 		return true;
@@ -368,7 +490,7 @@ void GameManager::sell()
 	String type;
 	int idx;
 	std::cin >> type >> idx;
-	if (idx < 0 || idx >= FIELDS_COUNT) 
+	if (idx < 0 || idx >= FIELDS_COUNT)
 	{
 		std::cout << "There is no such field!\n";
 		return;
@@ -418,8 +540,27 @@ void GameManager::quit()
 	std::cout << players[currPlayer]->getUserName() << " quitted the game!\n";
 }
 
+void GameManager::saveGame()
+{
+	savePlayers();
+	saveFields();
+	return;
+}
+
 void GameManager::setPlayers()
 {
+	if ((!isBinaryFileEmpty("players.txt") && !isBinaryFileEmpty("fields.txt")))
+	{
+		std::cout << "Would you like to continue the game ";
+		if (getNumAnswer())
+		{
+			if (loadPlayers()||loadFields())
+			{
+				return;
+			}
+			std::cout << "failed!\n";
+		} 
+	}
 	std::cout << "How many players are going to play? (2-6): ";
 	int playersCnt = getNumAnswer();
 	activePlayers = playersCnt;
@@ -431,16 +572,6 @@ void GameManager::setPlayers()
 		players.push_back(new Player(username));
 		clearConsole();
 	}
-	// to delete
-	Property* prop = static_cast<Property*> (getFields()[1]);
-	prop->setOwner(players[0]);
-	Property* prop2 = static_cast<Property*> (getFields()[3]);
-	prop2->setOwner(players[0]);
-
-	Property* prop3 = static_cast<Property*> (getFields()[39]);
-	prop3->setOwner(players[1]);
-	Property* prop4 = static_cast<Property*> (getFields()[37]);
-	prop4->setOwner(players[0]);
 }
 
 bool GameManager::canBuildCottage(int fieldInd) const
@@ -559,12 +690,12 @@ void GameManager::buildCottage(int fieldIdx)
 
 void GameManager::buildCastle(int fieldIdx)
 {
-	if (fieldIdx < 0 || fieldIdx>=FIELDS_COUNT) 
+	if (fieldIdx < 0 || fieldIdx >= FIELDS_COUNT)
 	{
 		std::cout << "There is no such field!\n";
 		return;
 	}
-	if (!canBuildCastle(fieldIdx)) 
+	if (!canBuildCastle(fieldIdx))
 	{
 		std::cout << "You cannot build a castle there!\n";
 		return;
@@ -661,11 +792,12 @@ void GameManager::tradeForMoney()
 		std::cout << "";
 		return;
 	}
-	handleTradePropForMoney( fieldInd, money, reseiverInd);
+	handleTradePropForMoney(fieldInd, money, reseiverInd);
 }
 
 void GameManager::play()
 {
+	//presentBoard(getFields(), 12);
 	setPlayers();
 	String command;
 	bool rolled = false;
@@ -676,6 +808,7 @@ void GameManager::play()
 
 	while (activePlayers > 1)
 	{
+
 		if (dept > 0)
 		{
 			if (players[currPlayer]->getBalance() >= dept)
@@ -712,6 +845,14 @@ void GameManager::play()
 		clearConsole();
 	}
 	void endTheGame();
+}
+ bool isBinaryFileEmpty(const char* filename)
+{
+	std::ifstream file(filename, std::ios::binary | std::ios::ate);
+	if (!file.is_open()) {
+		return true;
+	}
+	return file.tellg() == 0;
 }
 
 bool isNumber(const String& str)
@@ -754,6 +895,22 @@ int getNumAnswer()
 	}
 	clearConsole();
 	return strToInt(answer);
+}
+
+bool getCorrectAnswer()
+{
+	char answer;
+	std::cin >> answer;
+	while (!(answer == 'y' || answer == 'Y' || answer == 'n' || answer == 'N'))
+	{
+		std::cout << "Please enter a valid symbol! ";
+		std::cin.clear();
+		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		std::cin >> answer;
+	}
+	std::cin.clear();
+	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+	return answer == 'y';
 }
 
 bool isNum2to6(const String& str)

@@ -5,6 +5,8 @@
 
 Player::Player(String userName) : userName(userName), balance(BEG_BALANCE) {}
 
+Player::Player(String userName, int possition, int balance, bool inJail, int jailTurns, int pairsOfDice) :userName(userName), possition(possition), balance(balance), inJail(inJail), jailTurns(jailTurns), pairsOfDice(pairsOfDice) {}
+
 int Player::getBalance() const
 {
     return balance;

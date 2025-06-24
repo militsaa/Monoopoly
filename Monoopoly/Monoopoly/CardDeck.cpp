@@ -9,8 +9,6 @@ void CardDeck::shuffleCards(int times)
 	{
 		fstRandIndex = randomNumberGenerator(CARDS_CNT);
 		secRandIndex = randomNumberGenerator(CARDS_CNT);
-		// /*fstRandIndex = randomNumberGenerator(2);
-		// secRandIndex = randomNumberGenerator(2);*/
 		cards.swapVal(fstRandIndex,secRandIndex);
 	}
 }

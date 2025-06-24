@@ -12,11 +12,11 @@ class Player {
 
 public:
 	Player(String userName);
+	Player(String userName, int possition, int balance, bool inJail, int jailTurns, int pairsOfDice);
 	int getBalance() const;
 	int getJailTurns() const;
 	void addJailTurn(); 
-	bool getInJail() const;
-	//void setInJail(bool currently);	
+	bool getInJail() const;	
 	int getPairsOfDice() const;
 	void setPairsOfDice(int val);
 	void addPairsOfDice();

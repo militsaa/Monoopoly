@@ -68,7 +68,12 @@ void CommandReactFactory::action(const String& command, bool& rolled, bool& roll
 	}
 	else if (command == "SAVE")
 	{
-
+		if (dept)
+		{
+			std::cout << "You cannot save the game right now!";
+			return;
+		}
+		gm.saveGame();
 	}
 	else if (command == "QUIT")
 	{

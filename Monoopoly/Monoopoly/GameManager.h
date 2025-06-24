@@ -4,10 +4,12 @@
 #include "Board.h"
 #include "BuildableProperty.h"
 
+bool isBinaryFileEmpty(const char* filename);
 bool isNumber(const String& str);
 bool isDigit(char ch);
 int strToInt(const String& str);
 int getNumAnswer();
+bool getCorrectAnswer();
 bool isNum2to6(const String& str);
 void clearConsole();
 
@@ -19,7 +21,7 @@ class GameManager {
 	int castlesLeft = 12;
 	int activePlayers;
 
-	GameManager();
+	GameManager() = default;
 
 	bool canBuildCottage(int fieldInd)const;
 	bool canBuildCastle(int fieldInd)const;
@@ -44,7 +46,14 @@ class GameManager {
 	bool handlePairOfDice(int first, int second, bool& rolled);
 	void setPlayers();
 	bool askForConsent(const String&);
-	void endTheGame()const;
+	void endTheGame() const;
+	void savePlayers();
+	void saveFields();
+	bool loadPlayers();
+	bool loadFields();
+	void readStringFromFile(std::istream&, String&);
+	int getIndexOfPlayer(Player* p);
+	//void presentBoard(const Vector<Field*>& fields, int width) const;
 
 public:
 	GameManager(const GameManager& other) = delete;
@@ -65,5 +74,6 @@ public:
 	void build();
 	void sell();
 	void quit();
+	void saveGame();
 	void play();
 };
