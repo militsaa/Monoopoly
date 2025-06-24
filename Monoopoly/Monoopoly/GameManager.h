@@ -30,7 +30,7 @@ class GameManager {
 	int getFieldIndByName(const String& fieldName)const;
 	int getPlayerIndByName(const String& username)const;
 	bool canSell()const;
-	bool canSellCastle(Vector<BuildableProperty*> neighb);
+	bool canSellCastle(Vector<BuildableProperty*> neighb) const;
 	bool canSellCottage(Vector<BuildableProperty*> neighb);
 	void handleTradeMoneyForProp(const String& want, const String& give, int reseiverInd);
 	void handleTradePropForMoney(const String& want, const String& give, int reseiverInd);
@@ -54,6 +54,7 @@ public:
 	Vector<Field*> getFields() const;
 	void removeActivePlayer();
 	bool payJail();
+	int getActivePlayerCnt() const;
 
 	void trade();
 	bool rollTheDiesAndMove();

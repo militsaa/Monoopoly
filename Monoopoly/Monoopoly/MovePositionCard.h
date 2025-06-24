@@ -6,6 +6,6 @@ class MovePositionCard : public Card {
 	//bool shouldCollectGo;
 public:
 	MovePositionCard(CardType type, String description, int steps);
-	void applyEffect(Player& player,) const override;
+	void applyEffect(Player& player) const override;
 	MovePositionCard* clone() const override;
 };

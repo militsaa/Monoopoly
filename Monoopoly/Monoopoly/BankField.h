@@ -7,5 +7,5 @@ protected:
     int amount;
 public:
     BankField(String name, FieldType type, int amount);
-    virtual void applyEffect(Player& player, int& dept)=0;
+    virtual void applyEffect(Player& player)=0;
 };

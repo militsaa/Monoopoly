@@ -6,6 +6,7 @@ MovePositionCard::MovePositionCard(CardType type, String description, int steps)
 void MovePositionCard::applyEffect(Player& player) const
 {
 	player.movePosition(steps);
+	int dept = gm.stepOnNewField(dept);
 }
 
 MovePositionCard* MovePositionCard::clone() const

@@ -1,6 +1,8 @@
 #include "CardField.h"
 #include "Card.h"
 
+CardDeck CardField::deck;
+
 CardField::CardField(String name, FieldType type) : Field(name, type) {}
 
 CardField* CardField::clone() const
@@ -8,8 +10,8 @@ CardField* CardField::clone() const
 	return new CardField(*this);
 }
 
-void CardField::drawAndApply(Player& player, int dept) const
+void CardField::drawAndApply(Player& player) const
 {
 	Card* currCard = deck.draw();
-	currCard->applyEffect(player, dept);
+	currCard->applyEffect(player);
 }

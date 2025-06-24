@@ -100,7 +100,7 @@ bool GameManager::canSell() const
 	return false;
 }
 
-bool GameManager::canSellCastle(Vector<BuildableProperty*> neighb)
+bool GameManager::canSellCastle(Vector<BuildableProperty*> neighb) const
 {
 	const int baseInd = 0;
 	if (cottagesLeft < 4)
@@ -256,7 +256,7 @@ bool GameManager::rollTheDiesAndMove()
 	return false;
 }
 
-int GameManager::stepOnNewField(int dept)
+int GameManager::stepOnNewField()
 {
 	int fieldIdx = players[currPlayer]->getPosition();
 	Field* field = static_cast<Field*>(getFields()[fieldIdx]);
@@ -269,16 +269,17 @@ int GameManager::stepOnNewField(int dept)
 	{
 		players[currPlayer]->setInJail(true);
 		players[currPlayer]->setPosition(JAIL_IDX);
+		return 0;
 	}
 	else if(field->getType() == FieldType::TAXFIELD)
 	{
 		TaxField* taxField = static_cast<TaxField*>(field);
-		taxField->applyEffect(*players[currPlayer], dept);
+		taxField->applyEffect(*players[currPlayer]);
 	}
 	else if (field->getType() == FieldType::CARDFIELD)
 	{
-		CardField* taxField = static_cast<CardField*>(field);
-		taxField.
+		CardField* cardField = static_cast<CardField*>(field);
+		//cardField.
 	}
 }
 
@@ -546,6 +547,11 @@ bool GameManager::payJail()
 	}
 	players[currPlayer]->payForJail();
 	return players[currPlayer]->getInJail();
+}
+
+int GameManager::getActivePlayerCnt() const
+{
+	return activePlayers;
 }
 
 void GameManager::trade()
