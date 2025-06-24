@@ -2,12 +2,16 @@
 #include "Vector.h"
 #include "Player.h"
 
-void GroupPaymentCard::getMoneyFromOthers(GameManager& gm, Player& player) const
+void GroupPaymentCard::getMoneyFromOthers(GameManager& gm, Player& player, int &dept) const
 {
 	for (size_t i = 0; i < gm.getPlayers().getSize(); i++)
 	{
 		if (gm.getPlayers()[i]->getUserName() != player.getUserName())
 		{
+			if (gm.getPlayers()[i]->giveMoney(amount)>=amoun)
+			{
+
+			}
 			gm.getPlayers()[i]->giveMoney(amount);
 			if (!gm.getPlayers()[i]->isBankrupt())
 			{
@@ -37,12 +41,12 @@ void GroupPaymentCard::giveMoneyToOthers(GameManager& gm, Player& player) const
 
 GroupPaymentCard::GroupPaymentCard(CardType type, String description, int amount) : Card(type, description), amount(amount) {}
 
-void GroupPaymentCard::applyEffect(Player& player) const
+void GroupPaymentCard::applyEffect(Player& player, int& dept) const
 {
 	GameManager& gm = GameManager::getInstance();
 	if (amount > 0)
 	{
-		getMoneyFromOthers(gm, player);
+		getMoneyFromOthers(gm, player, dept);
 		return;
 	}
 	giveMoneyToOthers(gm, player);

@@ -1,11 +1,16 @@
 #include "CommandReactFactory.h"
 #include "GameManager.h"
 
-void CommandReactFactory::action(const String& command, bool& rolled, bool& justGotInPrison, int& dept)
+void CommandReactFactory::action(const String& command, bool& rolled, bool& justGotInPrison, int& dept, bool& onTurn)
 {
 	GameManager& gm = GameManager::getInstance();
 	if (command == "ROLL")
 	{
+		if (!onTurn)
+		{
+			std::cout << "Its not your turn!\n";
+			return;
+		}
 		if (dept || rolled)
 		{
 			std::cout << "You cannot roll!\n";
@@ -17,7 +22,7 @@ void CommandReactFactory::action(const String& command, bool& rolled, bool& just
 			return;
 		}
 		rolled = true;
-		dept = gm.stepOnNewField();
+		dept = gm.stepOnNewField(dept);
 	}
 	else if (command == "END")
 	{
@@ -30,6 +35,10 @@ void CommandReactFactory::action(const String& command, bool& rolled, bool& just
 	}
 	else if (command == "BUY")
 	{
+		if (!onTurn)
+		{
+			return;
+		}
 		if (!rolled || dept > 0)
 		{
 			std::cout << "You cannot buy a property right now!\n";
@@ -39,6 +48,10 @@ void CommandReactFactory::action(const String& command, bool& rolled, bool& just
 	}
 	else if (command == "BUILD")
 	{
+		if (!onTurn)
+		{
+			return;
+		}
 		gm.build();
 	}
 	else if (command == "SELL")
@@ -51,7 +64,11 @@ void CommandReactFactory::action(const String& command, bool& rolled, bool& just
 	}
 	else if (command == "PAYJAIL")
 	{
-		
+		if (!onTurn)
+		{
+			return;
+		}
+		gm.payJail();
 	}
 	else if (command == "SAVE")
 	{

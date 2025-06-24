@@ -2,7 +2,7 @@
 
 PaymentCard::PaymentCard(CardType type, String description, int amount) : Card(type, description), amount(amount){}
 
-void PaymentCard::applyEffect(Player& player) const
+void PaymentCard::applyEffect(Player& player, int& dept) const
 {
 	if (amount>0)
 	{

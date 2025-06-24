@@ -2,8 +2,12 @@
 
 TaxField::TaxField(String name, FieldType type, int amount) : BankField(name, type, amount){}
 
-void TaxField::applyEffect(Player& p)
+void TaxField::applyEffect(Player& p, int& dept)
 {
+	if (p.getBalance()<amount)
+	{
+		dept += amount;
+	}
 	p.giveMoney(amount);
 }
 

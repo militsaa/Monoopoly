@@ -3,6 +3,8 @@
 #include "Constants.h"
 #include "Random.h"
 #include "CommandReactFactory.h"
+#include "TaxField.h"
+#include "CardField.h"
 
 GameManager::GameManager()
 {
@@ -213,7 +215,13 @@ void GameManager::sellAllMorInNeighb(int fieldInd)
 	}
 }
 
-void GameManager::playDept(int dept)
+void GameManager::payDeptFromCard(int dept)
+{
+	players[currPlayer]->giveMoney(dept);
+	players[currPlayer]->addMoney(dept);
+}
+
+void GameManager::payDept(int dept)
 {
 	int fieldInd = players[currPlayer]->getPosition();
 	Field* field = getFields()[fieldInd];
@@ -248,15 +256,29 @@ bool GameManager::rollTheDiesAndMove()
 	return false;
 }
 
-int GameManager::stepOnNewField()
+int GameManager::stepOnNewField(int dept)
 {
 	int fieldIdx = players[currPlayer]->getPosition();
 	Field* field = static_cast<Field*>(getFields()[fieldIdx]);
 	if (field->getType() == FieldType::PROPERTY)
-		//Field* field = static_cast<Field*>(getFields()[fieldIdx]);
 	{
 		Property* prop = static_cast<Property*>(field);
 		return prop->stepedOnProp();
+	}
+	else if (field->getType() == FieldType::GOTOJAIL)
+	{
+		players[currPlayer]->setInJail(true);
+		players[currPlayer]->setPosition(JAIL_IDX);
+	}
+	else if(field->getType() == FieldType::TAXFIELD)
+	{
+		TaxField* taxField = static_cast<TaxField*>(field);
+		taxField->applyEffect(*players[currPlayer], dept);
+	}
+	else if (field->getType() == FieldType::CARDFIELD)
+	{
+		CardField* taxField = static_cast<CardField*>(field);
+		taxField.
 	}
 }
 
@@ -516,9 +538,14 @@ bool GameManager::handlePairOfDice(int first, int second)
 	}
 }
 
-void GameManager::payJail()
+bool GameManager::payJail()
 {
+	if (!players[currPlayer]->getInJail())
+	{
+		std::cout << "You are not in jail!\n";
+	}
 	players[currPlayer]->payForJail();
+	return players[currPlayer]->getInJail();
 }
 
 void GameManager::trade()
@@ -553,15 +580,21 @@ void GameManager::play()
 	bool rolled = false;
 	bool justGotInPrison = false;
 	int dept = 0;
+	bool onTurn = true;
 
 	while (activePlayers>1)
 	{
-		CommandReactFactory::action(command, rolled, justGotInPrison, dept); 
+		CommandReactFactory::action(command, rolled, justGotInPrison, dept, onTurn); 
 		if (dept > 0)
 		{
 			if (players[currPlayer]->getBalance() >= dept)
 			{
-				playDept(dept);
+				if (!onTurn)
+				{
+				payDeptFromCard(dept);
+				return;
+				}
+				payDept(dept);
 			}
 		}
 		if (dept == 0 && !justGotInPrison)

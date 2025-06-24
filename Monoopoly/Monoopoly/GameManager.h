@@ -37,11 +37,11 @@ class GameManager {
 	void sellCastle(BuildableProperty* prop);
 	void sellCottages(BuildableProperty* prop, int count);
 	void sellAllMorInNeighb(int fieldInd);
-	void playDept(int dept);
+	void payDeptFromCard(int dept);
+	void payDept(int dept);
 	void buildCottage(const String& fieldName);
 	void buildCastle(const String& fieldName);
 	bool handlePairOfDice(int first, int second);
-	void payJail();
 	void setPlayers();
 	bool askForConsent(const String&);
 
@@ -53,10 +53,11 @@ public:
 	Player* getCurrPlayer() const;
 	Vector<Field*> getFields() const;
 	void removeActivePlayer();
+	bool payJail();
 
 	void trade();
 	bool rollTheDiesAndMove();
-	int stepOnNewField();
+	int stepOnNewField(int dept);
 	void buyProperty();
 	void build();
 	void sell();

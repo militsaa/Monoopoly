@@ -15,6 +15,6 @@ public:
 
 	Card(CardType type, String description);
 	~Card() = default;
-	virtual void applyEffect(Player& player) const = 0;
+	virtual void applyEffect(Player& player, int& dept) const = 0;
 	virtual Card* clone()const = 0;
 };

@@ -8,4 +8,5 @@ class CardField: public Field {
 public:
 	CardField(String name, FieldType type);
 	CardField* clone() const override;
+	void drawAndApply(Player& player, int dept)const;
 };
