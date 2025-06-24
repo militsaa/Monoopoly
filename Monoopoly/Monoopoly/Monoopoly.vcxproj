@@ -148,6 +148,7 @@
     <ClCompile Include="SmallStringOpt.cpp" />
     <ClCompile Include="Station.cpp" />
     <ClCompile Include="TaxField.cpp" />
+    <ClCompile Include="Visualize.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BankField.h" />
@@ -172,6 +173,7 @@
     <ClInclude Include="TaxField.h" />
     <ClInclude Include="Property.h" />
     <ClInclude Include="Vector.h" />
+    <ClInclude Include="Visualize.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
